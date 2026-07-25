@@ -1,4 +1,5 @@
 """Farms Module views package."""
+
 from modules.farms.views.farm_views import (
     FarmActivityViewSet,
     FarmCropViewSet,

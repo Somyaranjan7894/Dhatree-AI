@@ -1,10 +1,15 @@
 """
 Weather Service.
 """
+
 from django.db import transaction
+
 from core.services.base import BaseService
 from modules.weather_intelligence.models.weather_snapshot import WeatherSnapshot
-from modules.weather_intelligence.repositories.weather_repository import WeatherSnapshotRepository
+from modules.weather_intelligence.repositories.weather_repository import (
+    WeatherSnapshotRepository,
+)
+
 
 class WeatherService(BaseService):
     def __init__(self):

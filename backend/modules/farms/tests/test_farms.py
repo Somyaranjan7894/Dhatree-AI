@@ -2,11 +2,14 @@
 Unit and integration tests for Farm Management (`modules.farms`).
 Verifies Farm profile CRUD, area/coordinate validation, soft deletion, archiving, and activity logging.
 """
+
 from decimal import Decimal
+
 import pytest
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.test import APIClient
+
 from core.exceptions import ValidationError
 from modules.farms.models.farm import Farm
 from modules.farms.models.farm_activity import FarmActivity
@@ -55,7 +58,9 @@ class TestFarmService:
 
     def test_create_farm_invalid_area(self, farmer_user):
         service = FarmService()
-        with pytest.raises(ValidationError, match="Total farm area must be greater than 0"):
+        with pytest.raises(
+            ValidationError, match="Total farm area must be greater than 0"
+        ):
             service.create_farm(
                 owner=farmer_user,
                 farm_name="Negative Area Farm",
@@ -64,7 +69,9 @@ class TestFarmService:
 
     def test_create_farm_invalid_latitude(self, farmer_user):
         service = FarmService()
-        with pytest.raises(ValidationError, match="Latitude must be between -90.0 and 90.0"):
+        with pytest.raises(
+            ValidationError, match="Latitude must be between -90.0 and 90.0"
+        ):
             service.create_farm(
                 owner=farmer_user,
                 farm_name="Out of bounds Farm",
@@ -79,7 +86,9 @@ class TestFarmService:
             farm_name="Sunrise Orchard",
             area=Decimal("5.00"),
         )
-        with pytest.raises(ValidationError, match="already have an active farm named 'Sunrise Orchard'"):
+        with pytest.raises(
+            ValidationError, match="already have an active farm named 'Sunrise Orchard'"
+        ):
             service.create_farm(
                 owner=farmer_user,
                 farm_name="Sunrise Orchard",
@@ -88,8 +97,10 @@ class TestFarmService:
 
     def test_soft_delete_and_archive_farm(self, farmer_user):
         service = FarmService()
-        farm = service.create_farm(owner=farmer_user, farm_name="Archive Me", area=Decimal("4.00"))
-        
+        farm = service.create_farm(
+            owner=farmer_user, farm_name="Archive Me", area=Decimal("4.00")
+        )
+
         # Test archive
         archived = service.archive_farm(farm.id)
         assert archived.status == Farm.Status.ARCHIVED
@@ -107,7 +118,9 @@ class TestFarmService:
 class TestFarmActivityService:
     def test_log_activity_success(self, farmer_user):
         farm_service = FarmService()
-        farm = farm_service.create_farm(owner=farmer_user, farm_name="Activity Farm", area=Decimal("10.00"))
+        farm = farm_service.create_farm(
+            owner=farmer_user, farm_name="Activity Farm", area=Decimal("10.00")
+        )
 
         act_service = FarmActivityService()
         activity = act_service.log_activity(
@@ -123,7 +136,9 @@ class TestFarmActivityService:
 
     def test_log_activity_negative_cost(self, farmer_user):
         farm_service = FarmService()
-        farm = farm_service.create_farm(owner=farmer_user, farm_name="Cost Farm", area=Decimal("10.00"))
+        farm = farm_service.create_farm(
+            owner=farmer_user, farm_name="Cost Farm", area=Decimal("10.00")
+        )
 
         act_service = FarmActivityService()
         with pytest.raises(ValidationError, match="Cost incurred cannot be negative"):
@@ -137,7 +152,9 @@ class TestFarmActivityService:
 @pytest.mark.django_db
 class TestFarmAPIEndpoints:
     def test_list_farms_api(self, api_client, farmer_user):
-        Farm.objects.create(owner=farmer_user, farm_name="API Farm 1", area=Decimal("15.00"))
+        Farm.objects.create(
+            owner=farmer_user, farm_name="API Farm 1", area=Decimal("15.00")
+        )
         response = api_client.get("/api/v1/farms/")
         assert response.status_code == status.HTTP_200_OK
         assert response.data["success"] is True

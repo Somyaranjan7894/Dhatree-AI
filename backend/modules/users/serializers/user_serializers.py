@@ -1,7 +1,9 @@
 """
 Serializers for User profile representation and modification.
 """
+
 from rest_framework import serializers
+
 from modules.users.models.user import User
 
 
@@ -9,7 +11,9 @@ class UserSerializer(serializers.ModelSerializer):
     """Read-only representation of a user profile."""
 
     role_display = serializers.CharField(source="get_role_display", read_only=True)
-    status_display = serializers.CharField(source="get_account_status_display", read_only=True)
+    status_display = serializers.CharField(
+        source="get_account_status_display", read_only=True
+    )
 
     class Meta:
         model = User

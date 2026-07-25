@@ -1,9 +1,11 @@
 """
 Unit and integration tests for User Registration workflow and validation rules.
 """
+
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
+
 from modules.users.models.user import User
 
 
@@ -24,10 +26,14 @@ class RegistrationAPITests(APITestCase):
 
     def test_successful_registration(self):
         """Verify valid registration creates user and returns JWT tokens with standardized format."""
-        response = self.client.post(self.register_url, self.valid_payload, format="json")
+        response = self.client.post(
+            self.register_url, self.valid_payload, format="json"
+        )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(response.data["success"])
-        self.assertEqual(response.data["message"], "User account registered successfully.")
+        self.assertEqual(
+            response.data["message"], "User account registered successfully."
+        )
         self.assertIn("user", response.data["data"])
         self.assertIn("tokens", response.data["data"])
         self.assertIn("access", response.data["data"]["tokens"])
@@ -45,7 +51,9 @@ class RegistrationAPITests(APITestCase):
             username="existing_user",
             password="OtherPassword123!",
         )
-        response = self.client.post(self.register_url, self.valid_payload, format="json")
+        response = self.client.post(
+            self.register_url, self.valid_payload, format="json"
+        )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertFalse(response.data["success"])
         self.assertIn("errors", response.data)
@@ -58,7 +66,9 @@ class RegistrationAPITests(APITestCase):
             username="farmer_ramesh",
             password="OtherPassword123!",
         )
-        response = self.client.post(self.register_url, self.valid_payload, format="json")
+        response = self.client.post(
+            self.register_url, self.valid_payload, format="json"
+        )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertFalse(response.data["success"])
         self.assertIn("errors", response.data)

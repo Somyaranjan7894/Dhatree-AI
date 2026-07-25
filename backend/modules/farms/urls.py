@@ -2,7 +2,9 @@
 URL routing configuration for the Farms module.
 Registers all Farm endpoints under `/api/v1/farms/`.
 """
+
 from rest_framework.routers import DefaultRouter
+
 from modules.farms.views.farm_views import (
     FarmActivityViewSet,
     FarmCropViewSet,

@@ -2,7 +2,9 @@
 Serializers for Farm, FarmCrop, FarmImage, and FarmActivity models.
 Enforces strict input validation and formats clean JSON representations.
 """
+
 from rest_framework import serializers
+
 from modules.farms.models.farm import Farm
 from modules.farms.models.farm_activity import FarmActivity
 from modules.farms.models.farm_crop import FarmCrop
@@ -12,7 +14,9 @@ from modules.farms.models.farm_image import FarmImage
 class FarmImageSerializer(serializers.ModelSerializer):
     """Serializer for FarmImage observation records."""
 
-    image_type_display = serializers.CharField(source="get_image_type_display", read_only=True)
+    image_type_display = serializers.CharField(
+        source="get_image_type_display", read_only=True
+    )
 
     class Meta:
         model = FarmImage
@@ -33,8 +37,12 @@ class FarmImageSerializer(serializers.ModelSerializer):
 class FarmActivitySerializer(serializers.ModelSerializer):
     """Serializer for FarmActivity history log entries."""
 
-    activity_type_display = serializers.CharField(source="get_activity_type_display", read_only=True)
-    performed_by_name = serializers.CharField(source="performed_by.username", read_only=True, default=None)
+    activity_type_display = serializers.CharField(
+        source="get_activity_type_display", read_only=True
+    )
+    performed_by_name = serializers.CharField(
+        source="performed_by.username", read_only=True, default=None
+    )
 
     class Meta:
         model = FarmActivity
@@ -59,7 +67,9 @@ class FarmCropSerializer(serializers.ModelSerializer):
     """Serializer for FarmCrop cultivation cycles."""
 
     crop_name = serializers.CharField(source="crop.crop_name", read_only=True)
-    scientific_name = serializers.CharField(source="crop.scientific_name", read_only=True)
+    scientific_name = serializers.CharField(
+        source="crop.scientific_name", read_only=True
+    )
     status_display = serializers.CharField(source="get_status_display", read_only=True)
     images = FarmImageSerializer(many=True, read_only=True)
     activities = FarmActivitySerializer(many=True, read_only=True)
@@ -94,9 +104,13 @@ class FarmSerializer(serializers.ModelSerializer):
     """Detailed read serializer for Farm profile including nested summary items."""
 
     owner_email = serializers.EmailField(source="owner.email", read_only=True)
-    owner_name = serializers.CharField(source="owner.full_name", read_only=True, default="")
+    owner_name = serializers.CharField(
+        source="owner.full_name", read_only=True, default=""
+    )
     unit_display = serializers.CharField(source="get_unit_display", read_only=True)
-    water_source_display = serializers.CharField(source="get_water_source_display", read_only=True)
+    water_source_display = serializers.CharField(
+        source="get_water_source_display", read_only=True
+    )
     status_display = serializers.CharField(source="get_status_display", read_only=True)
     active_crop_count = serializers.SerializerMethodField()
 
@@ -131,7 +145,11 @@ class FarmSerializer(serializers.ModelSerializer):
 
     def get_active_crop_count(self, obj: Farm) -> int:
         if hasattr(obj, "farm_crops"):
-            return obj.farm_crops.filter(is_deleted=False).exclude(status=FarmCrop.CropStatus.ARCHIVED).count()
+            return (
+                obj.farm_crops.filter(is_deleted=False)
+                .exclude(status=FarmCrop.CropStatus.ARCHIVED)
+                .count()
+            )
         return 0
 
 

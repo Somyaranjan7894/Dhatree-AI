@@ -2,10 +2,13 @@
 Notification model definition.
 Represents an alert or informational message sent to a user.
 """
+
 import uuid
+
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
 
 class ActiveNotificationManager(models.Manager):
     def get_queryset(self):
@@ -16,6 +19,7 @@ class Notification(models.Model):
     """
     System notification dispatched to a user.
     """
+
     class NotificationType(models.TextChoices):
         INFORMATION = "information", _("Information")
         SUCCESS = "success", _("Success")
@@ -33,7 +37,7 @@ class Notification(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="notifications",
-        help_text=_("User this notification is addressed to.")
+        help_text=_("User this notification is addressed to."),
     )
     title = models.CharField(_("title"), max_length=255)
     description = models.TextField(_("description"))

@@ -1,9 +1,12 @@
 """
 Soil Repository.
 """
+
 from typing import Type
+
 from core.repositories.base import BaseRepository
 from modules.soil_analysis.models.soil_sample import SoilSample
+
 
 class SoilSampleRepository(BaseRepository[SoilSample]):
     @property

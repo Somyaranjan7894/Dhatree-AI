@@ -2,7 +2,9 @@
 FarmImage model definition for Dhatree AI Agriculture Platform.
 Stores visual imagery captured across farms or specific crop cycles.
 """
+
 import uuid
+
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -24,7 +26,9 @@ class FarmImage(models.Model):
         GENERAL = "general", _("General Farm View")
         CROP_PROGRESS = "crop_progress", _("Crop Growth Progress")
         SOIL_CONDITION = "soil_condition", _("Soil Condition")
-        PEST_DISEASE_OBSERVATION = "pest_disease_observation", _("Pest / Disease Observation")
+        PEST_DISEASE_OBSERVATION = "pest_disease_observation", _(
+            "Pest / Disease Observation"
+        )
         HARVEST = "harvest", _("Harvesting Stage")
         OTHER = "other", _("Other / Miscellaneous")
 

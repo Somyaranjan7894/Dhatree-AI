@@ -1,4 +1,5 @@
 """Django AppConfig for Users Module."""
+
 from django.apps import AppConfig
 
 

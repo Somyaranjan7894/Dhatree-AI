@@ -1,4 +1,5 @@
 """Farms Module repositories package."""
+
 from modules.farms.repositories.farm_repository import (
     FarmActivityRepository,
     FarmCropRepository,

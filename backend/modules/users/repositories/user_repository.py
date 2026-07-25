@@ -2,8 +2,11 @@
 UserRepository encapsulating all database queries and transactions for the User domain boundary.
 Prevents direct ORM calls from Services or Views.
 """
+
 from typing import Any, Optional, Type
+
 from django.db.models import Q
+
 from core.repositories.base import BaseRepository
 from modules.users.models.user import User
 
@@ -36,7 +39,9 @@ class UserRepository(BaseRepository[User]):
         if not username:
             return None
         try:
-            return self.model_class.active_objects.get(username__iexact=username.strip())
+            return self.model_class.active_objects.get(
+                username__iexact=username.strip()
+            )
         except self.model_class.DoesNotExist:
             return None
 
@@ -52,7 +57,9 @@ class UserRepository(BaseRepository[User]):
         except self.model_class.DoesNotExist:
             return None
 
-    def check_email_exists(self, email: str, exclude_user_id: Optional[Any] = None) -> bool:
+    def check_email_exists(
+        self, email: str, exclude_user_id: Optional[Any] = None
+    ) -> bool:
         """Check if an email address is already taken by any user."""
         if not email:
             return False
@@ -61,7 +68,9 @@ class UserRepository(BaseRepository[User]):
             qs = qs.exclude(pk=exclude_user_id)
         return qs.exists()
 
-    def check_username_exists(self, username: str, exclude_user_id: Optional[Any] = None) -> bool:
+    def check_username_exists(
+        self, username: str, exclude_user_id: Optional[Any] = None
+    ) -> bool:
         """Check if a username is already taken by any user."""
         if not username:
             return False
@@ -70,7 +79,9 @@ class UserRepository(BaseRepository[User]):
             qs = qs.exclude(pk=exclude_user_id)
         return qs.exists()
 
-    def create_user_with_password(self, email: str, username: str, password: str, **extra_fields: Any) -> User:
+    def create_user_with_password(
+        self, email: str, username: str, password: str, **extra_fields: Any
+    ) -> User:
         """Create a user profile with hashed credentials via custom UserManager."""
         return self.model_class.objects.create_user(
             email=email,

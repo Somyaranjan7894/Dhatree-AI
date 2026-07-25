@@ -1,9 +1,12 @@
 """
 Notification Repository.
 """
+
 from typing import Type
+
 from core.repositories.base import BaseRepository
 from modules.notifications.models.notification import Notification
+
 
 class NotificationRepository(BaseRepository[Notification]):
     @property

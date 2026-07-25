@@ -1,4 +1,5 @@
 """Django AppConfig for Disease Diagnosis Module."""
+
 from django.apps import AppConfig
 
 

@@ -1,9 +1,11 @@
 """
 Unit and integration tests for User management endpoints and RBAC constraints.
 """
+
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
+
 from modules.users.models.user import User
 
 
@@ -25,7 +27,9 @@ class UserManagementAPITests(APITestCase):
             full_name="Gopal Rao",
         )
         self.list_url = reverse("users:user-list")
-        self.detail_url = reverse("users:user-detail", kwargs={"pk": self.farmer_user.pk})
+        self.detail_url = reverse(
+            "users:user-detail", kwargs={"pk": self.farmer_user.pk}
+        )
         self.me_url = reverse("authentication:me")
 
     def test_list_users_admin_only(self):
@@ -65,7 +69,7 @@ class UserManagementAPITests(APITestCase):
         response = self.client.patch(self.detail_url, update_data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["data"]["full_name"], "Gopal Rao Updated")
-        
+
         self.farmer_user.refresh_from_db()
         self.assertEqual(self.farmer_user.role, User.Role.FARMER)
         self.assertFalse(self.farmer_user.is_verified)
@@ -80,7 +84,7 @@ class UserManagementAPITests(APITestCase):
         # Verify user is excluded from active_objects and marked as deleted
         self.assertFalse(User.active_objects.filter(pk=self.farmer_user.pk).exists())
         self.assertTrue(User.objects.filter(pk=self.farmer_user.pk).exists())
-        
+
         soft_deleted_user = User.objects.get(pk=self.farmer_user.pk)
         self.assertTrue(soft_deleted_user.is_deleted)
         self.assertFalse(soft_deleted_user.is_active)

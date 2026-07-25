@@ -1,9 +1,12 @@
 """
 Crop Repository.
 """
+
 from typing import Type
+
 from core.repositories.base import BaseRepository
 from modules.crops.models.crop import Crop
+
 
 class CropRepository(BaseRepository[Crop]):
     @property

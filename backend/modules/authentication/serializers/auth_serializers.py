@@ -2,8 +2,11 @@
 Input and validation serializers for authentication workflows.
 Enforces strict credential validation and password strength rules before invoking AuthService.
 """
+
 import re
+
 from rest_framework import serializers
+
 from modules.users.models.user import User
 
 
@@ -15,7 +18,9 @@ class RegisterSerializer(serializers.Serializer):
     password = serializers.CharField(required=True, write_only=True, min_length=8)
     password_confirm = serializers.CharField(required=True, write_only=True)
     full_name = serializers.CharField(required=False, allow_blank=True, max_length=255)
-    phone_number = serializers.CharField(required=False, allow_blank=True, max_length=20)
+    phone_number = serializers.CharField(
+        required=False, allow_blank=True, max_length=20
+    )
     role = serializers.ChoiceField(choices=User.Role.choices, default=User.Role.FARMER)
 
     def validate_email(self, value: str) -> str:
@@ -31,13 +36,21 @@ class RegisterSerializer(serializers.Serializer):
 
     def validate(self, attrs: dict) -> dict:
         if attrs.get("password") != attrs.get("password_confirm"):
-            raise serializers.ValidationError({"password_confirm": "The two password fields didn't match."})
-        
+            raise serializers.ValidationError(
+                {"password_confirm": "The two password fields didn't match."}
+            )
+
         password = attrs.get("password")
-        if not re.search(r"[A-Z]", password) or not re.search(r"[a-z]", password) or not re.search(r"[0-9]", password):
-            raise serializers.ValidationError({
-                "password": "Password must contain at least one uppercase letter, one lowercase letter, and one digit."
-            })
+        if (
+            not re.search(r"[A-Z]", password)
+            or not re.search(r"[a-z]", password)
+            or not re.search(r"[0-9]", password)
+        ):
+            raise serializers.ValidationError(
+                {
+                    "password": "Password must contain at least one uppercase letter, one lowercase letter, and one digit."
+                }
+            )
         return attrs
 
 
@@ -56,7 +69,9 @@ class LoginSerializer(serializers.Serializer):
 class LogoutSerializer(serializers.Serializer):
     """Input serializer for JWT refresh token blacklisting upon logout."""
 
-    refresh = serializers.CharField(required=True, help_text="Refresh token to blacklist.")
+    refresh = serializers.CharField(
+        required=True, help_text="Refresh token to blacklist."
+    )
 
 
 class RefreshTokenSerializer(serializers.Serializer):
@@ -74,15 +89,27 @@ class ChangePasswordSerializer(serializers.Serializer):
 
     def validate(self, attrs: dict) -> dict:
         if attrs.get("new_password") != attrs.get("new_password_confirm"):
-            raise serializers.ValidationError({"new_password_confirm": "The new password fields didn't match."})
+            raise serializers.ValidationError(
+                {"new_password_confirm": "The new password fields didn't match."}
+            )
         if attrs.get("old_password") == attrs.get("new_password"):
-            raise serializers.ValidationError({"new_password": "New password cannot be identical to your old password."})
-        
+            raise serializers.ValidationError(
+                {
+                    "new_password": "New password cannot be identical to your old password."
+                }
+            )
+
         password = attrs.get("new_password")
-        if not re.search(r"[A-Z]", password) or not re.search(r"[a-z]", password) or not re.search(r"[0-9]", password):
-            raise serializers.ValidationError({
-                "new_password": "Password must contain at least one uppercase letter, one lowercase letter, and one digit."
-            })
+        if (
+            not re.search(r"[A-Z]", password)
+            or not re.search(r"[a-z]", password)
+            or not re.search(r"[0-9]", password)
+        ):
+            raise serializers.ValidationError(
+                {
+                    "new_password": "Password must contain at least one uppercase letter, one lowercase letter, and one digit."
+                }
+            )
         return attrs
 
 
@@ -104,7 +131,9 @@ class ResetPasswordSerializer(serializers.Serializer):
 
     def validate(self, attrs: dict) -> dict:
         if attrs.get("new_password") != attrs.get("new_password_confirm"):
-            raise serializers.ValidationError({"new_password_confirm": "The new password fields didn't match."})
+            raise serializers.ValidationError(
+                {"new_password_confirm": "The new password fields didn't match."}
+            )
         return attrs
 
 

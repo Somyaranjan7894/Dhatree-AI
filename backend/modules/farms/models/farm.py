@@ -2,7 +2,9 @@
 Farm model definition for Dhatree AI Agriculture Platform.
 Represents a geographical farming unit owned/managed by a User (Farmer).
 """
+
 import uuid
+
 from django.conf import settings
 from django.db import models
 from django.utils import timezone

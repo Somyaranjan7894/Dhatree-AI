@@ -2,7 +2,9 @@
 FarmCrop model definition for Dhatree AI Agriculture Platform.
 Represents a specific crop cycle (sowing to harvest) on a Farm parcel.
 """
+
 import uuid
+
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _

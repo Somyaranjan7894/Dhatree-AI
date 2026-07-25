@@ -1,4 +1,5 @@
 """Django AppConfig for Farms Module."""
+
 from django.apps import AppConfig
 
 

@@ -1,10 +1,15 @@
 import logging
-from typing import Dict, Any
+from typing import Any, Dict
+
 from ai.fertilizer_recommendation.predict import FertilizerPredictor
-from modules.fertilizer_recommendation.models.recommendation import FertilizerRecommendation
+
+from modules.fertilizer_recommendation.models.recommendation import (
+    FertilizerRecommendation,
+)
 
 logger = logging.getLogger(__name__)
 predictor_instance = None
+
 
 def get_predictor():
     global predictor_instance
@@ -16,6 +21,7 @@ def get_predictor():
             raise
     return predictor_instance
 
+
 class FertilizerRecommendationService:
     @staticmethod
     def predict_fertilizer(user, data: Dict[str, Any]) -> FertilizerRecommendation:
@@ -23,7 +29,7 @@ class FertilizerRecommendationService:
         Runs the AI model and saves the prediction to the database.
         """
         predictor = get_predictor()
-        
+
         # Prepare inputs
         ai_inputs = {
             "nitrogen": data.get("nitrogen"),
@@ -34,21 +40,23 @@ class FertilizerRecommendationService:
             "rainfall": data.get("rainfall"),
             "ph_level": data.get("ph_level"),
             "crop_type": data.get("crop_type"),
-            "soil_type": data.get("soil_type")
+            "soil_type": data.get("soil_type"),
         }
-        
+
         # Get threshold from config or default
         confidence_threshold = data.get("confidence_threshold", 0.5)
-        
+
         # Run inference
-        prediction_result = predictor.predict(ai_inputs, confidence_threshold=confidence_threshold)
-        
+        prediction_result = predictor.predict(
+            ai_inputs, confidence_threshold=confidence_threshold
+        )
+
         # Build metadata
         metadata = {
             "alternatives": prediction_result.get("alternatives", []),
-            "model_version": "v1.0.0" # Hardcoded for now, could be fetched from predictor
+            "model_version": "v1.0.0",  # Hardcoded for now, could be fetched from predictor
         }
-        
+
         # Save to DB
         recommendation = FertilizerRecommendation.objects.create(
             user=user,
@@ -67,7 +75,7 @@ class FertilizerRecommendationService:
             explanation=prediction_result.get("explanation"),
             application_guidance=prediction_result.get("application_guidance"),
             warnings=prediction_result.get("warnings"),
-            metadata=metadata
+            metadata=metadata,
         )
-        
+
         return recommendation

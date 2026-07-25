@@ -2,9 +2,12 @@
 Services orchestrating farm lifecycle, crop cycles, images, and history activities.
 Decouples views from Repositories and enforces all business invariants.
 """
-from typing import Any, Dict, Optional
+
 from decimal import Decimal
+from typing import Any, Dict, Optional
+
 from django.db.models.query import QuerySet
+
 from core.exceptions import ResourceNotFoundError, ValidationError
 from core.services.base import BaseService
 from modules.farms.models.farm import Farm
@@ -26,12 +29,16 @@ class FarmService(BaseService):
         super().__init__()
         self.farm_repo = farm_repository or FarmRepository()
 
-    def _validate_coordinates(self, latitude: Optional[Any], longitude: Optional[Any]) -> None:
+    def _validate_coordinates(
+        self, latitude: Optional[Any], longitude: Optional[Any]
+    ) -> None:
         if latitude is not None and latitude != "":
             try:
                 lat_val = Decimal(str(latitude))
                 if lat_val < Decimal("-90.0") or lat_val > Decimal("90.0"):
-                    raise ValidationError("Latitude must be between -90.0 and 90.0 degrees.")
+                    raise ValidationError(
+                        "Latitude must be between -90.0 and 90.0 degrees."
+                    )
             except (ValueError, TypeError):
                 raise ValidationError("Invalid latitude coordinate.")
 
@@ -39,7 +46,9 @@ class FarmService(BaseService):
             try:
                 lon_val = Decimal(str(longitude))
                 if lon_val < Decimal("-180.0") or lon_val > Decimal("180.0"):
-                    raise ValidationError("Longitude must be between -180.0 and 180.0 degrees.")
+                    raise ValidationError(
+                        "Longitude must be between -180.0 and 180.0 degrees."
+                    )
             except (ValueError, TypeError):
                 raise ValidationError("Invalid longitude coordinate.")
 
@@ -53,7 +62,10 @@ class FarmService(BaseService):
 
     def create_farm(self, owner: Any, **farm_data: Any) -> Farm:
         """Create a new farm after verifying area, coordinates, and uniqueness invariants."""
-        self.log_operation("create_farm", {"owner_id": str(owner.id), "farm_name": farm_data.get("farm_name")})
+        self.log_operation(
+            "create_farm",
+            {"owner_id": str(owner.id), "farm_name": farm_data.get("farm_name")},
+        )
 
         area = farm_data.get("area")
         if area is not None:
@@ -61,14 +73,18 @@ class FarmService(BaseService):
         else:
             raise ValidationError("Total area is required.")
 
-        self._validate_coordinates(farm_data.get("latitude"), farm_data.get("longitude"))
+        self._validate_coordinates(
+            farm_data.get("latitude"), farm_data.get("longitude")
+        )
 
         farm_name = farm_data.get("farm_name", "").strip()
         if not farm_name:
             raise ValidationError("Farm name is required.")
 
         if self.farm_repo.check_duplicate_farm_name(owner.id, farm_name):
-            raise ValidationError(f"You already have an active farm named '{farm_name}'.")
+            raise ValidationError(
+                f"You already have an active farm named '{farm_name}'."
+            )
 
         farm_data["owner"] = owner
         farm_data["farm_name"] = farm_name
@@ -79,16 +95,22 @@ class FarmService(BaseService):
         self.log_operation("get_farm", {"farm_id": str(farm_id)})
         return self.farm_repo.get_by_id_or_raise(farm_id)
 
-    def list_farms(self, owner_id: Optional[Any] = None, **filters: Any) -> QuerySet[Farm]:
+    def list_farms(
+        self, owner_id: Optional[Any] = None, **filters: Any
+    ) -> QuerySet[Farm]:
         """List active farms filtered by owner or administrative query parameters."""
-        self.log_operation("list_farms", {"owner_id": str(owner_id) if owner_id else "all", **filters})
+        self.log_operation(
+            "list_farms", {"owner_id": str(owner_id) if owner_id else "all", **filters}
+        )
         if owner_id:
             return self.farm_repo.list_by_owner(owner_id, **filters)
         return self.farm_repo.list_active(**filters)
 
     def update_farm(self, farm_id: Any, **update_data: Any) -> Farm:
         """Update farm attributes while preserving domain validation rules."""
-        self.log_operation("update_farm", {"farm_id": str(farm_id), "fields": list(update_data.keys())})
+        self.log_operation(
+            "update_farm", {"farm_id": str(farm_id), "fields": list(update_data.keys())}
+        )
         farm = self.farm_repo.get_by_id_or_raise(farm_id)
 
         if "area" in update_data and update_data["area"] is not None:
@@ -104,8 +126,12 @@ class FarmService(BaseService):
             if not farm_name:
                 raise ValidationError("Farm name cannot be empty.")
             if farm_name.lower() != farm.farm_name.lower():
-                if self.farm_repo.check_duplicate_farm_name(farm.owner.id, farm_name, exclude_farm_id=farm.id):
-                    raise ValidationError(f"You already have an active farm named '{farm_name}'.")
+                if self.farm_repo.check_duplicate_farm_name(
+                    farm.owner.id, farm_name, exclude_farm_id=farm.id
+                ):
+                    raise ValidationError(
+                        f"You already have an active farm named '{farm_name}'."
+                    )
             update_data["farm_name"] = farm_name
 
         # Prevent owner re-assignment via generic update
@@ -131,13 +157,17 @@ class FarmService(BaseService):
 class FarmCropService(BaseService):
     """Business service managing crop cultivation cycles across farm parcels."""
 
-    def __init__(self, farm_crop_repository: Optional[FarmCropRepository] = None) -> None:
+    def __init__(
+        self, farm_crop_repository: Optional[FarmCropRepository] = None
+    ) -> None:
         super().__init__()
         self.farm_crop_repo = farm_crop_repository or FarmCropRepository()
         self.farm_repo = FarmRepository()
 
     def create_farm_crop(self, farm_id: Any, crop_id: Any, **data: Any) -> FarmCrop:
-        self.log_operation("create_farm_crop", {"farm_id": str(farm_id), "crop_id": str(crop_id)})
+        self.log_operation(
+            "create_farm_crop", {"farm_id": str(farm_id), "crop_id": str(crop_id)}
+        )
         farm = self.farm_repo.get_by_id_or_raise(farm_id)
 
         area_allocated = data.get("area_allocated")
@@ -147,7 +177,9 @@ class FarmCropService(BaseService):
                 if area_val <= Decimal("0"):
                     raise ValidationError("Allocated area must be greater than 0.")
                 if area_val > farm.area:
-                    raise ValidationError(f"Allocated area ({area_val}) cannot exceed total farm area ({farm.area}).")
+                    raise ValidationError(
+                        f"Allocated area ({area_val}) cannot exceed total farm area ({farm.area})."
+                    )
             except (ValueError, TypeError):
                 raise ValidationError("Invalid decimal number for allocated area.")
         else:
@@ -177,10 +209,14 @@ class FarmCropService(BaseService):
             if area_val <= Decimal("0"):
                 raise ValidationError("Allocated area must be greater than 0.")
             if area_val > farm_crop.farm.area:
-                raise ValidationError(f"Allocated area ({area_val}) cannot exceed total farm area ({farm_crop.farm.area}).")
+                raise ValidationError(
+                    f"Allocated area ({area_val}) cannot exceed total farm area ({farm_crop.farm.area})."
+                )
 
         sowing_date = data.get("sowing_date", farm_crop.sowing_date)
-        expected_harvest = data.get("expected_harvest_date", farm_crop.expected_harvest_date)
+        expected_harvest = data.get(
+            "expected_harvest_date", farm_crop.expected_harvest_date
+        )
         if sowing_date and expected_harvest and expected_harvest <= sowing_date:
             raise ValidationError("Expected harvest date must be after sowing date.")
 
@@ -196,7 +232,9 @@ class FarmCropService(BaseService):
 class FarmImageService(BaseService):
     """Business service managing visual observations across farms."""
 
-    def __init__(self, farm_image_repository: Optional[FarmImageRepository] = None) -> None:
+    def __init__(
+        self, farm_image_repository: Optional[FarmImageRepository] = None
+    ) -> None:
         super().__init__()
         self.farm_image_repo = farm_image_repository or FarmImageRepository()
         self.farm_repo = FarmRepository()
@@ -224,13 +262,20 @@ class FarmImageService(BaseService):
 class FarmActivityService(BaseService):
     """Business service managing chronological activity history logs."""
 
-    def __init__(self, farm_activity_repository: Optional[FarmActivityRepository] = None) -> None:
+    def __init__(
+        self, farm_activity_repository: Optional[FarmActivityRepository] = None
+    ) -> None:
         super().__init__()
         self.farm_activity_repo = farm_activity_repository or FarmActivityRepository()
         self.farm_repo = FarmRepository()
 
-    def log_activity(self, farm_id: Any, performed_by: Optional[Any] = None, **data: Any) -> FarmActivity:
-        self.log_operation("log_activity", {"farm_id": str(farm_id), "activity_type": data.get("activity_type")})
+    def log_activity(
+        self, farm_id: Any, performed_by: Optional[Any] = None, **data: Any
+    ) -> FarmActivity:
+        self.log_operation(
+            "log_activity",
+            {"farm_id": str(farm_id), "activity_type": data.get("activity_type")},
+        )
         farm = self.farm_repo.get_by_id_or_raise(farm_id)
 
         if not data.get("title") or not str(data.get("title")).strip():

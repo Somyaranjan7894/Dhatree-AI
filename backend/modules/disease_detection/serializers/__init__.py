@@ -1,3 +1,6 @@
-from .prediction_serializers import DiseasePredictionSerializer, DiseasePredictionCreateSerializer
+from .prediction_serializers import (
+    DiseasePredictionCreateSerializer,
+    DiseasePredictionSerializer,
+)
 
-__all__ = ['DiseasePredictionSerializer', 'DiseasePredictionCreateSerializer']
+__all__ = ["DiseasePredictionSerializer", "DiseasePredictionCreateSerializer"]

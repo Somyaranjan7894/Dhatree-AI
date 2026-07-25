@@ -2,8 +2,11 @@
 UserService orchestrating profile retrieval, updates, and account management.
 Decouples views from UserRepository and enforces business invariants.
 """
+
 from typing import Any, Dict, Optional
+
 from django.db.models.query import QuerySet
+
 from core.exceptions import ResourceNotFoundError, ValidationError
 from core.services.base import BaseService
 from modules.users.models.user import User
@@ -31,18 +34,25 @@ class UserService(BaseService):
         """
         Update user profile fields after verifying uniqueness constraints on email and username.
         """
-        self.log_operation("update_user_profile", {"user_id": str(user_id), "fields": list(update_data.keys())})
+        self.log_operation(
+            "update_user_profile",
+            {"user_id": str(user_id), "fields": list(update_data.keys())},
+        )
         user = self.user_repo.get_by_id_or_raise(user_id)
 
         email = update_data.get("email")
         if email and email.strip() != user.email:
             if self.user_repo.check_email_exists(email, exclude_user_id=user.id):
-                raise ValidationError("That email address is already taken by another account.")
+                raise ValidationError(
+                    "That email address is already taken by another account."
+                )
 
         username = update_data.get("username")
         if username and username.strip() != user.username:
             if self.user_repo.check_username_exists(username, exclude_user_id=user.id):
-                raise ValidationError("That username is already taken by another account.")
+                raise ValidationError(
+                    "That username is already taken by another account."
+                )
 
         # Prevent direct privilege escalation or account status manipulation through profile update
         update_data.pop("role", None)

@@ -2,8 +2,11 @@
 Repositories encapsulating all database queries and transactions for the Farms domain boundary.
 Prevents direct ORM calls from Services or Views.
 """
+
 from typing import Any, Optional, Type
+
 from django.db.models.query import QuerySet
+
 from core.repositories.base import BaseRepository
 from modules.farms.models.farm import Farm
 from modules.farms.models.farm_activity import FarmActivity
@@ -27,17 +30,23 @@ class FarmRepository(BaseRepository[Farm]):
 
     def list_by_owner(self, owner_id: Any, **filters: Any) -> QuerySet[Farm]:
         """Retrieve all active farms belonging to a specific owner profile."""
-        return self.model_class.active_objects.select_related("owner").filter(owner_id=owner_id, **filters)
+        return self.model_class.active_objects.select_related("owner").filter(
+            owner_id=owner_id, **filters
+        )
 
     def list_active(self, **filters: Any) -> QuerySet[Farm]:
         """Retrieve all non-deleted farms."""
         return self.model_class.active_objects.select_related("owner").filter(**filters)
 
-    def check_duplicate_farm_name(self, owner_id: Any, farm_name: str, exclude_farm_id: Optional[Any] = None) -> bool:
+    def check_duplicate_farm_name(
+        self, owner_id: Any, farm_name: str, exclude_farm_id: Optional[Any] = None
+    ) -> bool:
         """Check if an active farm with the same name already exists for this owner."""
         if not farm_name or not owner_id:
             return False
-        qs = self.model_class.active_objects.filter(owner_id=owner_id, farm_name__iexact=farm_name.strip())
+        qs = self.model_class.active_objects.filter(
+            owner_id=owner_id, farm_name__iexact=farm_name.strip()
+        )
         if exclude_farm_id:
             qs = qs.exclude(pk=exclude_farm_id)
         return qs.exists()

@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from typing import List, Dict
+from typing import Dict, List
+
 
 class BaseProvider(ABC):
     """
@@ -8,16 +9,18 @@ class BaseProvider(ABC):
     """
 
     @abstractmethod
-    def generate_response(self, user, message: str, context_snapshot: Dict, history: List[Dict]) -> str:
+    def generate_response(
+        self, user, message: str, context_snapshot: Dict, history: List[Dict]
+    ) -> str:
         """
         Generate a response based on the user's message, current context snapshot, and chat history.
-        
+
         Args:
             user: The User instance making the request.
             message: The current user message.
             context_snapshot: Contextual data (e.g. recent predictions, farms) attached to the session.
             history: List of previous messages in the format [{'role': 'user'/'assistant', 'content': '...'}]
-            
+
         Returns:
             str: The assistant's response.
         """

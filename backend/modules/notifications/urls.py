@@ -1,5 +1,6 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
+
 from .views.notification_views import NotificationViewSet
 
 app_name = "notifications"

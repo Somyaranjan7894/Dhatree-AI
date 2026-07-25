@@ -1,4 +1,5 @@
 """Django AppConfig for Reports Module."""
+
 from django.apps import AppConfig
 
 

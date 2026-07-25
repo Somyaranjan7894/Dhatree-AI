@@ -1,4 +1,5 @@
 """Django AppConfig for Fertilizer Recommendation Module."""
+
 from django.apps import AppConfig
 
 

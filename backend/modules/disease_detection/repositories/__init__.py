@@ -1,3 +1,3 @@
 from .prediction_repository import DiseasePredictionRepository
 
-__all__ = ['DiseasePredictionRepository']
+__all__ = ["DiseasePredictionRepository"]

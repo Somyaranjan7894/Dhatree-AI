@@ -1,9 +1,17 @@
-from django.core.management.base import BaseCommand
-from modules.disease_diagnosis.models.knowledge import Disease, Treatment, Prevention, Reference
 import json
 
+from django.core.management.base import BaseCommand
+
+from modules.disease_diagnosis.models.knowledge import (
+    Disease,
+    Prevention,
+    Reference,
+    Treatment,
+)
+
+
 class Command(BaseCommand):
-    help = 'Seeds the Disease Diagnosis Knowledge Base with initial data'
+    help = "Seeds the Disease Diagnosis Knowledge Base with initial data"
 
     def handle(self, *args, **kwargs):
         # A small mock seed list of diseases often found in PlantVillage
@@ -19,31 +27,31 @@ class Command(BaseCommand):
                         "type": "Chemical",
                         "method": "Apply fungicides like Captan or Mancozeb.",
                         "application_frequency": "Every 7-10 days starting from green tip stage until petal fall.",
-                        "safety_precautions": "Wear protective clothing and mask during application."
+                        "safety_precautions": "Wear protective clothing and mask during application.",
                     },
                     {
                         "type": "Organic",
                         "method": "Apply Neem oil or liquid copper soap.",
                         "application_frequency": "Every 7 days during early spring.",
-                        "safety_precautions": "Avoid application in temperatures over 85°F."
-                    }
+                        "safety_precautions": "Avoid application in temperatures over 85°F.",
+                    },
                 ],
                 "preventions": [
                     {
                         "measure": "Rake and destroy fallen leaves in autumn.",
-                        "timing": "Autumn/Winter"
+                        "timing": "Autumn/Winter",
                     },
                     {
                         "measure": "Prune trees to allow better air circulation.",
-                        "timing": "Winter"
-                    }
+                        "timing": "Winter",
+                    },
                 ],
                 "references": [
                     {
                         "source_name": "Agricultural Extension Service",
-                        "url": "https://example.com/apple-scab"
+                        "url": "https://example.com/apple-scab",
                     }
-                ]
+                ],
             },
             {
                 "name": "Corn___Common_rust",
@@ -56,16 +64,16 @@ class Command(BaseCommand):
                         "type": "Chemical",
                         "method": "Apply foliar fungicides containing strobilurins or triazoles.",
                         "application_frequency": "At the first sign of pustules.",
-                        "safety_precautions": "Do not apply near water sources."
+                        "safety_precautions": "Do not apply near water sources.",
                     }
                 ],
                 "preventions": [
                     {
                         "measure": "Use rust-resistant corn hybrids.",
-                        "timing": "Pre-planting"
+                        "timing": "Pre-planting",
                     }
                 ],
-                "references": []
+                "references": [],
             },
             {
                 "name": "Potato___Late_blight",
@@ -78,39 +86,41 @@ class Command(BaseCommand):
                         "type": "Chemical",
                         "method": "Apply Chlorothalonil or Mancozeb immediately.",
                         "application_frequency": "Every 5-7 days under wet conditions.",
-                        "safety_precautions": "Toxic to aquatic life; follow label strictly."
+                        "safety_precautions": "Toxic to aquatic life; follow label strictly.",
                     }
                 ],
                 "preventions": [
                     {
                         "measure": "Destroy cull piles and volunteers.",
-                        "timing": "Spring"
+                        "timing": "Spring",
                     }
                 ],
-                "references": []
-            }
+                "references": [],
+            },
         ]
 
         created_count = 0
         for d_data in seed_data:
             disease, created = Disease.objects.get_or_create(
-                name=d_data['name'],
+                name=d_data["name"],
                 defaults={
-                    'crop': d_data['crop'],
-                    'description': d_data['description'],
-                    'symptoms': d_data['symptoms'],
-                    'severity': d_data['severity'],
-                    'version': '1.0.0'
-                }
+                    "crop": d_data["crop"],
+                    "description": d_data["description"],
+                    "symptoms": d_data["symptoms"],
+                    "severity": d_data["severity"],
+                    "version": "1.0.0",
+                },
             )
-            
+
             if created:
                 created_count += 1
-                for t in d_data.get('treatments', []):
+                for t in d_data.get("treatments", []):
                     Treatment.objects.create(disease=disease, **t)
-                for p in d_data.get('preventions', []):
+                for p in d_data.get("preventions", []):
                     Prevention.objects.create(disease=disease, **p)
-                for r in d_data.get('references', []):
+                for r in d_data.get("references", []):
                     Reference.objects.create(disease=disease, **r)
 
-        self.stdout.write(self.style.SUCCESS(f'Successfully seeded {created_count} new diseases.'))
+        self.stdout.write(
+            self.style.SUCCESS(f"Successfully seeded {created_count} new diseases.")
+        )

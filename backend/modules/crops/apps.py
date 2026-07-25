@@ -1,4 +1,5 @@
 """Django AppConfig for Crops Module (`modules.crops`)."""
+
 from django.apps import AppConfig
 
 

@@ -1,7 +1,9 @@
 """
 URL routes for Authentication domain module (`/api/v1/auth/`).
 """
+
 from django.urls import path
+
 from modules.authentication.views.auth_views import (
     ChangePasswordAPIView,
     CurrentUserAPIView,

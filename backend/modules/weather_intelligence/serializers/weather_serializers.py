@@ -1,5 +1,7 @@
 from rest_framework import serializers
+
 from modules.weather_intelligence.models.weather_snapshot import WeatherSnapshot
+
 
 class WeatherSnapshotSerializer(serializers.ModelSerializer):
     class Meta:

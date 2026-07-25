@@ -1,9 +1,12 @@
 """
 Weather Snapshot Repository.
 """
+
 from typing import Type
+
 from core.repositories.base import BaseRepository
 from modules.weather_intelligence.models.weather_snapshot import WeatherSnapshot
+
 
 class WeatherSnapshotRepository(BaseRepository[WeatherSnapshot]):
     @property

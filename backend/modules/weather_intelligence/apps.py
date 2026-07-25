@@ -1,4 +1,5 @@
 """Django AppConfig for Weather Intelligence Module."""
+
 from django.apps import AppConfig
 
 

@@ -1,4 +1,5 @@
 """Django AppConfig for Crop Recommendation Module."""
+
 from django.apps import AppConfig
 
 

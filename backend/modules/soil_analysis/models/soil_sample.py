@@ -2,18 +2,23 @@
 SoilSample model definition.
 Represents a soil test record for a specific farm.
 """
+
 import uuid
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
 
 class ActiveSoilSampleManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(is_deleted=False)
 
+
 class SoilSample(models.Model):
     """
     Soil test data for a farm parcel.
     """
+
     class Texture(models.TextChoices):
         SANDY = "sandy", _("Sandy")
         CLAY = "clay", _("Clay")
@@ -28,19 +33,39 @@ class SoilSample(models.Model):
         "farms.Farm",
         on_delete=models.CASCADE,
         related_name="soil_samples",
-        help_text=_("Farm from which the sample was taken.")
+        help_text=_("Farm from which the sample was taken."),
     )
     sample_date = models.DateField(_("sample date"))
-    
-    nitrogen = models.DecimalField(_("nitrogen (N) mg/kg"), max_digits=8, decimal_places=2, blank=True, null=True)
-    phosphorus = models.DecimalField(_("phosphorus (P) mg/kg"), max_digits=8, decimal_places=2, blank=True, null=True)
-    potassium = models.DecimalField(_("potassium (K) mg/kg"), max_digits=8, decimal_places=2, blank=True, null=True)
-    organic_carbon = models.DecimalField(_("organic carbon (%)"), max_digits=5, decimal_places=2, blank=True, null=True)
-    ph_level = models.DecimalField(_("pH level"), max_digits=4, decimal_places=2, blank=True, null=True)
-    moisture = models.DecimalField(_("moisture content (%)"), max_digits=5, decimal_places=2, blank=True, null=True)
-    electrical_conductivity = models.DecimalField(_("electrical conductivity (dS/m)"), max_digits=6, decimal_places=2, blank=True, null=True)
-    texture = models.CharField(_("soil texture"), max_length=20, choices=Texture.choices, blank=True)
-    
+
+    nitrogen = models.DecimalField(
+        _("nitrogen (N) mg/kg"), max_digits=8, decimal_places=2, blank=True, null=True
+    )
+    phosphorus = models.DecimalField(
+        _("phosphorus (P) mg/kg"), max_digits=8, decimal_places=2, blank=True, null=True
+    )
+    potassium = models.DecimalField(
+        _("potassium (K) mg/kg"), max_digits=8, decimal_places=2, blank=True, null=True
+    )
+    organic_carbon = models.DecimalField(
+        _("organic carbon (%)"), max_digits=5, decimal_places=2, blank=True, null=True
+    )
+    ph_level = models.DecimalField(
+        _("pH level"), max_digits=4, decimal_places=2, blank=True, null=True
+    )
+    moisture = models.DecimalField(
+        _("moisture content (%)"), max_digits=5, decimal_places=2, blank=True, null=True
+    )
+    electrical_conductivity = models.DecimalField(
+        _("electrical conductivity (dS/m)"),
+        max_digits=6,
+        decimal_places=2,
+        blank=True,
+        null=True,
+    )
+    texture = models.CharField(
+        _("soil texture"), max_length=20, choices=Texture.choices, blank=True
+    )
+
     remarks = models.TextField(_("remarks / lab notes"), blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)

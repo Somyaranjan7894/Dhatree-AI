@@ -1,10 +1,15 @@
 """
 Notification Service.
 """
+
 from django.db import transaction
+
 from core.services.base import BaseService
 from modules.notifications.models.notification import Notification
-from modules.notifications.repositories.notification_repository import NotificationRepository
+from modules.notifications.repositories.notification_repository import (
+    NotificationRepository,
+)
+
 
 class NotificationService(BaseService):
     def __init__(self):
@@ -26,7 +31,9 @@ class NotificationService(BaseService):
     @transaction.atomic
     def mark_as_read(self, notification_id: str) -> Notification:
         notification = self.get_notification(notification_id)
-        self.log_operation("mark_notification_as_read", {"notification_id": notification_id})
+        self.log_operation(
+            "mark_notification_as_read", {"notification_id": notification_id}
+        )
         notification.mark_as_read()
         return notification
 

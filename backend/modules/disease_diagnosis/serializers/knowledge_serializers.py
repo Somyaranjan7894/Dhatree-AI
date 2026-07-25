@@ -1,20 +1,30 @@
 from rest_framework import serializers
-from modules.disease_diagnosis.models.knowledge import Disease, Treatment, Prevention, Reference
+
+from modules.disease_diagnosis.models.knowledge import (
+    Disease,
+    Prevention,
+    Reference,
+    Treatment,
+)
+
 
 class TreatmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Treatment
-        fields = ['id', 'type', 'method', 'application_frequency', 'safety_precautions']
+        fields = ["id", "type", "method", "application_frequency", "safety_precautions"]
+
 
 class PreventionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prevention
-        fields = ['id', 'measure', 'timing']
+        fields = ["id", "measure", "timing"]
+
 
 class ReferenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reference
-        fields = ['id', 'source_name', 'url']
+        fields = ["id", "source_name", "url"]
+
 
 class DiseaseSerializer(serializers.ModelSerializer):
     treatments = TreatmentSerializer(many=True, read_only=True)
@@ -24,7 +34,18 @@ class DiseaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Disease
         fields = [
-            'id', 'name', 'crop', 'description', 'symptoms', 'possible_causes', 
-            'severity', 'version', 'metadata', 'created_at', 'updated_at',
-            'treatments', 'preventions', 'references'
+            "id",
+            "name",
+            "crop",
+            "description",
+            "symptoms",
+            "possible_causes",
+            "severity",
+            "version",
+            "metadata",
+            "created_at",
+            "updated_at",
+            "treatments",
+            "preventions",
+            "references",
         ]

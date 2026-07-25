@@ -1,4 +1,5 @@
 """Django AppConfig for Dashboard Module."""
+
 from django.apps import AppConfig
 
 

@@ -1,4 +1,5 @@
 """Django AppConfig for Soil Analysis Module."""
+
 from django.apps import AppConfig
 
 

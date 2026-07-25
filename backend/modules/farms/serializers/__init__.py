@@ -1,4 +1,5 @@
 """Farms Module serializers package."""
+
 from modules.farms.serializers.farm_serializers import (
     FarmActivitySerializer,
     FarmCreateUpdateSerializer,

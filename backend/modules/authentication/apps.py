@@ -1,4 +1,5 @@
 """Django AppConfig for Authentication module."""
+
 from django.apps import AppConfig
 
 

@@ -2,7 +2,9 @@
 FarmActivity model definition for Dhatree AI Agriculture Platform.
 Stores chronological agricultural activity history logs for farms and crop cycles.
 """
+
 import uuid
+
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -24,8 +26,12 @@ class FarmActivity(models.Model):
     class ActivityType(models.TextChoices):
         SOWING = "sowing", _("Sowing / Planting")
         IRRIGATION = "irrigation", _("Irrigation / Watering")
-        FERTILIZER_APPLICATION = "fertilizer_application", _("Fertilizer / Manure Application")
-        PESTICIDE_APPLICATION = "pesticide_application", _("Pesticide / Herbicide Application")
+        FERTILIZER_APPLICATION = "fertilizer_application", _(
+            "Fertilizer / Manure Application"
+        )
+        PESTICIDE_APPLICATION = "pesticide_application", _(
+            "Pesticide / Herbicide Application"
+        )
         WEEDING = "weeding", _("Weeding / Cleaning")
         SOIL_TESTING = "soil_testing", _("Soil Sampling / Testing")
         HARVESTING = "harvesting", _("Harvesting")

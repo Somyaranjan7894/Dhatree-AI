@@ -1,5 +1,7 @@
 from rest_framework import serializers
+
 from modules.soil_analysis.models.soil_sample import SoilSample
+
 
 class SoilSampleSerializer(serializers.ModelSerializer):
     class Meta:

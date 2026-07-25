@@ -2,12 +2,14 @@
 API Views for Authentication and Account Lifecycle.
 Strictly decoupled from data access and business logic via AuthService and UserService.
 """
+
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from core.permissions import IsAuthenticated
 from core.responses import success_response
 from modules.authentication.serializers.auth_serializers import (
@@ -103,7 +105,9 @@ class LogoutAPIView(APIView):
         auth_service = AuthService()
         auth_service.logout(refresh_token_str=serializer.validated_data["refresh"])
 
-        return success_response(data={}, message="Logged out and token blacklisted successfully.")
+        return success_response(
+            data={}, message="Logged out and token blacklisted successfully."
+        )
 
 
 class RefreshTokenAPIView(APIView):
@@ -159,7 +163,9 @@ class CurrentUserAPIView(APIView):
     )
     def get(self, request: Request) -> Response:
         serializer = UserSerializer(request.user)
-        return success_response(data=serializer.data, message="Profile retrieved successfully.")
+        return success_response(
+            data=serializer.data, message="Profile retrieved successfully."
+        )
 
 
 class ProfileUpdateAPIView(APIView):

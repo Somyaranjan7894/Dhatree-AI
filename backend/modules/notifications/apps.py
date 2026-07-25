@@ -1,4 +1,5 @@
 """Django AppConfig for Notifications Module."""
+
 from django.apps import AppConfig
 
 

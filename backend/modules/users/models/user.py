@@ -2,7 +2,9 @@
 Custom User Model definition for Dhatree AI Digital Agriculture Platform.
 Uses UUID primary keys, email uniqueness, role-based access control, and soft deletion.
 """
+
 import uuid
+
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils import timezone
@@ -172,4 +174,12 @@ class User(AbstractUser):
         self.is_active = False
         self.account_status = self.AccountStatus.DEACTIVATED
         self.deleted_at = timezone.now()
-        self.save(update_fields=["is_deleted", "is_active", "account_status", "deleted_at", "updated_at"])
+        self.save(
+            update_fields=[
+                "is_deleted",
+                "is_active",
+                "account_status",
+                "deleted_at",
+                "updated_at",
+            ]
+        )

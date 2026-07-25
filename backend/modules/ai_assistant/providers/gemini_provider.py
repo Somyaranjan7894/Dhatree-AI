@@ -1,14 +1,18 @@
-import os
 import json
 import logging
-from typing import List, Dict
+import os
+from typing import Dict, List
+
 from google import genai
 from google.genai import types
 from google.genai.errors import APIError
-from .base import BaseProvider
+
 from modules.ai_assistant.prompts import SYSTEM_PROMPT
 
+from .base import BaseProvider
+
 logger = logging.getLogger(__name__)
+
 
 class GeminiProvider(BaseProvider):
     def __init__(self, model_name: str = "gemini-2.5-flash"):
@@ -24,11 +28,17 @@ class GeminiProvider(BaseProvider):
     def _format_history(self, history: List[Dict]) -> List[types.Content]:
         formatted = []
         for msg in history:
-            role = "user" if msg['role'] == "user" else "model"
-            formatted.append(types.Content(role=role, parts=[types.Part.from_text(text=msg['content'])]))
+            role = "user" if msg["role"] == "user" else "model"
+            formatted.append(
+                types.Content(
+                    role=role, parts=[types.Part.from_text(text=msg["content"])]
+                )
+            )
         return formatted
 
-    def generate_response(self, user, message: str, context_snapshot: Dict, history: List[Dict]) -> str:
+    def generate_response(
+        self, user, message: str, context_snapshot: Dict, history: List[Dict]
+    ) -> str:
         if not self.client:
             return "Configuration Error: The AI Assistant API key is missing. Please contact the administrator."
 
@@ -47,7 +57,12 @@ class GeminiProvider(BaseProvider):
             # Call Gemini
             response = self.client.models.generate_content(
                 model=self.model_name,
-                contents=formatted_history + [types.Content(role="user", parts=[types.Part.from_text(text=full_prompt)])]
+                contents=formatted_history
+                + [
+                    types.Content(
+                        role="user", parts=[types.Part.from_text(text=full_prompt)]
+                    )
+                ],
             )
 
             if not response or not response.text:
@@ -59,9 +74,9 @@ class GeminiProvider(BaseProvider):
         except APIError as e:
             # Handle standard GenAI SDK errors gracefully without exposing keys
             logger.error(f"Gemini API Error: {e.message}")
-            if getattr(e, 'code', 0) == 429:
+            if getattr(e, "code", 0) == 429:
                 return "The AI Assistant is currently experiencing high traffic. Please try again in a few moments."
-            elif getattr(e, 'code', 0) in [401, 403]:
+            elif getattr(e, "code", 0) in [401, 403]:
                 return "Configuration Error: Unauthorized. Please check the AI Assistant configuration."
             return "I encountered an error communicating with the intelligence service. Please try again later."
         except Exception as e:

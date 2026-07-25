@@ -2,15 +2,17 @@
 API Views for User management.
 Delegates all domain processing directly to UserService and returns standardized JSON responses.
 """
+
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework import filters, status, viewsets
+from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
+
 from core.permissions import IsAdmin, IsAuthenticated
 from core.responses import paginated_response, success_response
 from modules.users.models.user import User
-from rest_framework.decorators import action
 from modules.users.serializers.user_serializers import (
     UserSerializer,
     UserUpdateSerializer,
@@ -27,7 +29,11 @@ class UserViewSet(viewsets.GenericViewSet):
 
     queryset = User.active_objects.all()
     serializer_class = UserSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
     filterset_fields = ["role", "account_status", "is_verified"]
     search_fields = ["email", "username", "full_name"]
     ordering_fields = ["created_at", "username"]
@@ -47,7 +53,9 @@ class UserViewSet(viewsets.GenericViewSet):
         return UserSerializer
 
     def get_paginated_response(self, data):
-        return paginated_response(self.paginator, data, message="Users retrieved successfully.")
+        return paginated_response(
+            self.paginator, data, message="Users retrieved successfully."
+        )
 
     def list(self, request: Request) -> Response:
         """Return paginated list of users filtered by query parameters."""
@@ -60,25 +68,33 @@ class UserViewSet(viewsets.GenericViewSet):
             return self.get_paginated_response(serializer.data)
 
         serializer = self.get_serializer(queryset, many=True)
-        return success_response(data=serializer.data, message="Users retrieved successfully.")
+        return success_response(
+            data=serializer.data, message="Users retrieved successfully."
+        )
 
     def retrieve(self, request: Request, pk: str = None) -> Response:
         """Retrieve a specific user's profile by ID."""
         user = self.user_service.get_user_profile(user_id=pk)
         serializer = self.get_serializer(user)
-        return success_response(data=serializer.data, message="User profile retrieved successfully.")
+        return success_response(
+            data=serializer.data, message="User profile retrieved successfully."
+        )
 
     @action(detail=False, methods=["get"])
     def me(self, request: Request) -> Response:
         """Retrieve the currently authenticated user's profile."""
         serializer = self.get_serializer(request.user)
-        return success_response(data=serializer.data, message="Profile retrieved successfully.")
+        return success_response(
+            data=serializer.data, message="Profile retrieved successfully."
+        )
 
     def update(self, request: Request, pk: str = None) -> Response:
         """Full update of user profile attributes."""
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = self.user_service.update_user_profile(user_id=pk, **serializer.validated_data)
+        user = self.user_service.update_user_profile(
+            user_id=pk, **serializer.validated_data
+        )
         return success_response(
             data=UserSerializer(user).data, message="Profile updated successfully."
         )
@@ -87,7 +103,9 @@ class UserViewSet(viewsets.GenericViewSet):
         """Partial update of user profile attributes."""
         serializer = self.get_serializer(data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
-        user = self.user_service.update_user_profile(user_id=pk, **serializer.validated_data)
+        user = self.user_service.update_user_profile(
+            user_id=pk, **serializer.validated_data
+        )
         return success_response(
             data=UserSerializer(user).data, message="Profile updated successfully."
         )
@@ -95,4 +113,8 @@ class UserViewSet(viewsets.GenericViewSet):
     def destroy(self, request: Request, pk: str = None) -> Response:
         """Soft-delete a user account (Admin only)."""
         self.user_service.soft_delete_user_account(user_id=pk)
-        return success_response(data={}, message="Account deactivated successfully.", status_code=status.HTTP_200_OK)
+        return success_response(
+            data={},
+            message="Account deactivated successfully.",
+            status_code=status.HTTP_200_OK,
+        )

@@ -1,9 +1,11 @@
 """
 Unit and integration tests for User Login, Logout, JWT Rotation, and Blacklisting.
 """
+
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
+
 from modules.users.models.user import User
 
 
@@ -55,7 +57,9 @@ class LoginLogoutAPITests(APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertFalse(response.data["success"])
-        self.assertEqual(response.data["message"], "Invalid email/username or password.")
+        self.assertEqual(
+            response.data["message"], "Invalid email/username or password."
+        )
 
     def test_login_on_soft_deleted_account_fails(self):
         """Verify login attempt on soft-deleted profile is rejected with 401 Unauthorized."""
@@ -91,16 +95,25 @@ class LoginLogoutAPITests(APITestCase):
         refresh_token = login_resp.data["data"]["tokens"]["refresh"]
 
         # Step 2: Refresh token pair
-        refresh_resp = self.client.post(self.refresh_url, {"refresh": refresh_token}, format="json")
+        refresh_resp = self.client.post(
+            self.refresh_url, {"refresh": refresh_token}, format="json"
+        )
         self.assertEqual(refresh_resp.status_code, status.HTTP_200_OK)
         new_refresh_token = refresh_resp.data["data"]["refresh"]
 
         # Step 3: Logout using the latest refresh token
-        logout_resp = self.client.post(self.logout_url, {"refresh": new_refresh_token}, format="json")
+        logout_resp = self.client.post(
+            self.logout_url, {"refresh": new_refresh_token}, format="json"
+        )
         self.assertEqual(logout_resp.status_code, status.HTTP_200_OK)
         self.assertTrue(logout_resp.data["success"])
 
         # Step 4: Attempt to refresh using the blacklisted token must fail with 400 or 401
-        failed_refresh = self.client.post(self.refresh_url, {"refresh": new_refresh_token}, format="json")
-        self.assertIn(failed_refresh.status_code, [status.HTTP_400_BAD_REQUEST, status.HTTP_401_UNAUTHORIZED])
+        failed_refresh = self.client.post(
+            self.refresh_url, {"refresh": new_refresh_token}, format="json"
+        )
+        self.assertIn(
+            failed_refresh.status_code,
+            [status.HTTP_400_BAD_REQUEST, status.HTTP_401_UNAUTHORIZED],
+        )
         self.assertFalse(failed_refresh.data["success"])

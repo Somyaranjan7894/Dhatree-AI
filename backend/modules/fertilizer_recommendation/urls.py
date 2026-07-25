@@ -1,12 +1,17 @@
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from modules.fertilizer_recommendation.views.recommendation_views import FertilizerRecommendationViewSet
+
+from modules.fertilizer_recommendation.views.recommendation_views import (
+    FertilizerRecommendationViewSet,
+)
 
 router = DefaultRouter()
-router.register(r'predictions', FertilizerRecommendationViewSet, basename='fertilizer-prediction')
+router.register(
+    r"predictions", FertilizerRecommendationViewSet, basename="fertilizer-prediction"
+)
 
-app_name = 'fertilizer_recommendation'
+app_name = "fertilizer_recommendation"
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path("", include(router.urls)),
 ]

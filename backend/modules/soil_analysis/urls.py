@@ -1,5 +1,6 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
+
 from .views.soil_views import SoilSampleViewSet
 
 app_name = "soil_analysis"
