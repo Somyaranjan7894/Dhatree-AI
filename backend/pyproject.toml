@@ -1,6 +1,6 @@
 [tool.black]
 line-length = 88
-target-version = ['py313']
+target-version = ['py311']
 include = '\.pyi?$'
 exclude = '''
 /(
@@ -32,7 +32,7 @@ markers = [
 ]
 
 [tool.mypy]
-python_version = "3.13"
+python_version = "3.11"
 plugins = ["mypy_django_plugin.main", "djangorestframework-stubs.mypy_plugin"]
 ignore_missing_imports = true
 strict_optional = true
