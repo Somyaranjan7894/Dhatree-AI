@@ -30,7 +30,22 @@ def test_crop_recommendation_flow(api_client, test_user):
         "rainfall": 202.9
     }
     
-    response = api_client.post(url, payload, format="json")
+    import sys, os
+    from django.conf import settings
+    root_dir = os.path.abspath(os.path.join(settings.BASE_DIR, '..'))
+    if root_dir not in sys.path:
+        sys.path.insert(0, root_dir)
+    
+    from unittest.mock import patch
+    with patch('ai.crop_recommendation.predict.predict_crop') as mock_predict:
+        mock_predict.return_value = {
+            "recommended_crop": "rice",
+            "confidence_score": 0.95,
+            "alternatives": ["jute", "cotton"],
+            "explanation": "Mocked explanation."
+        }
+        response = api_client.post(url, payload, format="json")
+        
     assert response.status_code == 201, f"Failed: {response.json()}"
     
     data = response.json()
