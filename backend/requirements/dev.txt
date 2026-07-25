@@ -1,0 +1,25 @@
+# ==============================================================================
+# Dhatree AI Development & Testing Requirements
+# ==============================================================================
+
+-r base.txt
+
+# Code Formatting & Linting
+black>=24.4.2
+isort>=5.13.2
+flake8>=7.1.0
+pre-commit>=3.7.1
+mypy>=1.10.0
+django-stubs>=5.0.0
+djangorestframework-stubs>=3.14.0
+
+# Testing & Coverage
+pytest>=8.2.0
+pytest-django>=4.8.0
+pytest-cov>=5.0.0
+pytest-mock>=3.14.0
+factory-boy>=3.3.0
+
+# Developer Experience & Debugging
+ipython>=8.24.0
+django-debug-toolbar>=4.4.0

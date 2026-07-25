@@ -1,0 +1,17 @@
+{
+    "CPU": {
+        "Average Latency (ms)": 675.7795739173889,
+        "Median Latency (ms)": 674.9866008758545,
+        "P95 Latency (ms)": 1031.252908706665,
+        "Images/sec": 1.479772456280612
+    },
+    "GPU": null,
+    "Memory": {
+        "Peak RAM Allocation (MB)": 4.055501,
+        "Total Process RAM (MB)": 755.605504
+    },
+    "Stress Test (10,000 images)": {
+        "Total Time (s)": 509.3695743083954,
+        "Images/sec": 19.632110955150115
+    }
+}

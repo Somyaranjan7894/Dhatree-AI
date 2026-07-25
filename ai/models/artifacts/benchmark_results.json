@@ -1,0 +1,7 @@
+{
+    "model_file_size_mb": 12.509906768798828,
+    "load_time_seconds": 1.0014874935150146,
+    "ram_usage_increment_mb": 55.32421875,
+    "avg_inference_latency_ms": 72.0774507522583,
+    "p95_inference_latency_ms": 79.67218160629272
+}

@@ -1,0 +1,32 @@
+{
+    "dataset_source": "PlantVillage (Local Directory)",
+    "dataset_version": "1.0",
+    "num_classes": 38,
+    "training_date": "2026-07-21T12:02:10.922034",
+    "best_architecture": "mobilenetv3",
+    "input_size": [
+        224,
+        224
+    ],
+    "evaluation_metrics": {
+        "mobilenetv3": {
+            "training_time_seconds": 11.344677448272705,
+            "best_val_accuracy": 0.04545454680919647,
+            "f1_score": 0.0303030303030303,
+            "combined_score": 0.03787878855611339
+        },
+        "efficientnetb0": {
+            "training_time_seconds": 15.380362749099731,
+            "best_val_accuracy": 0.0,
+            "f1_score": 0.0,
+            "combined_score": 0.0
+        },
+        "resnet50": {
+            "training_time_seconds": 14.653097867965698,
+            "best_val_accuracy": 0.0,
+            "f1_score": 0.0,
+            "combined_score": 0.0
+        }
+    },
+    "model_version": "3.0-production"
+}

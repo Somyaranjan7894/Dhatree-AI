@@ -1,0 +1,23 @@
+{
+    "Time Taken (s)": 72.28315353393555,
+    "Success": true,
+    "Top Prediction": "Unknown/Low Confidence",
+    "Confidence": 0.1214347705245018,
+    "Metadata": {
+        "top_predictions": [
+            {
+                "class": "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+                "confidence": 0.1214347705245018
+            },
+            {
+                "class": "Orange___Haunglongbing_(Citrus_greening)",
+                "confidence": 0.11957362294197083
+            },
+            {
+                "class": "Soybean___healthy",
+                "confidence": 0.07971802353858948
+            }
+        ],
+        "heatmap_base64": null
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "Time Taken (s)": 0.7443728446960449,
+    "Success": false,
+    "Top Prediction": "System Error",
+    "Confidence": 0.0,
+    "Metadata": {
+        "error": "No module named 'ai.disease_detection'"
+    }
+}

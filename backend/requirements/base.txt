@@ -1,0 +1,45 @@
+# ==============================================================================
+# Dhatree AI Base Production Requirements (Python 3.13)
+# ==============================================================================
+
+# Django & REST Framework
+Django>=5.0,<5.2
+djangorestframework>=3.15.0
+djangorestframework-simplejwt>=5.3.1
+drf-spectacular>=0.27.2
+django-cors-headers>=4.3.1
+django-filter>=24.2
+django-environ>=0.11.2
+python-decouple>=3.8
+
+# Database & ORM drivers
+psycopg2-binary>=2.9.9
+
+# Validation & Data Serialization
+pydantic>=2.7.0
+zope.interface>=6.2
+
+# Task Queue & Caching
+celery[redis]>=5.4.0
+redis>=5.0.3
+
+# AI / Data Science Stack
+google-genai>=0.2.0
+numpy>=1.26.4
+pandas>=2.2.2
+scikit-learn>=1.4.2
+# Note: For GPU setups or specific OS architectures, tensorflow and torch can be customized via pip index wheels
+tensorflow>=2.16.1
+torch>=2.3.0
+torchvision>=0.18.0
+opencv-python-headless>=4.9.0.80
+Pillow>=10.3.0
+
+# HTTP & Utilities
+requests>=2.31.0
+python-dotenv>=1.0.1
+gunicorn>=22.0.0
+whitenoise>=6.6.0
+cloudinary>=1.39.0
+django-cloudinary-storage>=0.3.0
+structlog>=24.1.0

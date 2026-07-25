@@ -1,0 +1,44 @@
+[tool.black]
+line-length = 88
+target-version = ['py313']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.pytest_cache
+  | \.venv
+  | __pycache__
+  | migrations
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+skip = ["migrations", ".venv", "__pycache__"]
+known_first_party = ["config", "core", "modules", "ai_engine"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "--maxfail=2 --disable-warnings --strict-markers -q"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+markers = [
+    "unit: mark a test as a unit test (isolated from DB/network)",
+    "integration: mark a test as an integration test (uses DB or AI models)",
+    "ai: mark a test as involving heavy AI/ML pipeline evaluation"
+]
+
+[tool.mypy]
+python_version = "3.13"
+plugins = ["mypy_django_plugin.main", "djangorestframework-stubs.mypy_plugin"]
+ignore_missing_imports = true
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+check_untyped_defs = true
+
+[tool.django-stubs]
+django_settings_module = "config.settings.development"

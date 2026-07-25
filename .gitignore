@@ -1,0 +1,120 @@
+# ==============================================================================
+# Dhatree AI Root .gitignore
+# ==============================================================================
+
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+env/
+venv/
+.env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+static_root/
+
+# Node & Frontend (React/TypeScript/Vite)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+dist/
+dist-ssr/
+*.local
+.cache
+.vite
+
+# Environment Variables & Secrets (NEVER COMMIT SECRETS)
+.env
+.env.*
+!.env.example
+!.env.test
+
+# IDE & Editor Directories
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# AI & Machine Learning Artifacts
+*.h5
+*.hdf5
+*.keras
+*.pt
+*.pth
+*.onnx
+*.pkl
+*.joblib
+checkpoints/
+ml_models_cache/
+wandb/
+mlruns/
+
+# Docker & OS
+docker-compose.override.yml
+*.sublime-project
+*.sublime-workspace
+
+# Testing & Coverage
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+junit.xml
+coverage.xml
+
+# Dhatree AI Specific Overrides
+tfds_data/
+raw_data/
+processed_data/
+*.jpg
+*.png
+*.jpeg
+!frontend/src/assets/*.jpg
+!frontend/src/assets/*.png
+!frontend/src/assets/*.svg
+!docs/images/*.jpg
+!docs/images/*.png
+scratch_*.py
+corrupt.jpg
+test_leaf.jpg
+verify_ai_models.py
+verify_e2e.py
+app.log
+error.log
+security.log

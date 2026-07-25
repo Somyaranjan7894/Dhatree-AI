@@ -1,0 +1,25 @@
+{
+    "initial_rows": 99,
+    "columns": [
+        "Temparature",
+        "Humidity ",
+        "Moisture",
+        "Soil Type",
+        "Crop Type",
+        "Nitrogen",
+        "Potassium",
+        "Phosphorous",
+        "Fertilizer Name"
+    ],
+    "issues": [],
+    "final_rows": 99,
+    "classes": {
+        "Urea": 22,
+        "DAP": 18,
+        "28-28": 17,
+        "14-35-14": 14,
+        "20-20": 14,
+        "17-17-17": 7,
+        "10-26-26": 7
+    }
+}

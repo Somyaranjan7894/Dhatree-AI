@@ -1,0 +1,16 @@
+{
+    "dataset_path": "C:\\Users\\SOUMYA RANJAN BEHERA\\OneDrive\\Desktop\\dhatree_AI\\ai\\datasets\\raw\\plantvillage",
+    "num_classes": 39,
+    "split": "70/15/15",
+    "best_architecture": "resnet50",
+    "epochs": 50,
+    "evaluation_metrics": {
+        "test_accuracy": 0.9852,
+        "top3_accuracy": 0.9991,
+        "precision": 0.9855,
+        "recall": 0.984,
+        "f1_score": 0.9841,
+        "training_time": 704.8667087554932
+    },
+    "training_timestamp": "2026-07-24T20:40:44.659910"
+}

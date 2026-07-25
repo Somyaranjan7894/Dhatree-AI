@@ -1,0 +1,7 @@
+{
+    "dataset": "plant_village_mock",
+    "downloaded_at": "2026-07-21T11:01:57.211338",
+    "num_classes": 38,
+    "total_images": 190,
+    "source": "generated_mock_due_to_403"
+}

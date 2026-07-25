@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-page: #fbf9f5;
+    --text-main: #1e293b;
+    --border-color: #e2e8f0;
+  }
+
+  .dark {
+    --bg-page: #0b291d;
+    --text-main: #f1f5f9;
+    --border-color: #1c5d44;
+  }
+
+  * {
+    @apply border-slate-200 dark:border-forest-light;
+  }
+
+  body {
+    @apply bg-earth-50 text-slate-800 dark:bg-forest-dark dark:text-slate-100 antialiased font-sans transition-colors duration-200;
+  }
+
+  ::selection {
+    @apply bg-primary-200 text-primary-900 dark:bg-primary-800 dark:text-primary-100;
+  }
+
+  /* Custom Scrollbar for Agriculture UI */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-forest-light rounded-full hover:bg-slate-400 dark:hover:bg-primary-600 transition-colors;
+  }
+}
+
+@layer components {
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-forest-dark transition-all duration-150;
+  }
+
+  .glass-panel {
+    @apply bg-white/90 dark:bg-forest-medium/90 backdrop-blur-md border border-slate-200/80 dark:border-forest-light/80 shadow-sm rounded-xl;
+  }
+}
