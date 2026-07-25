@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('disease_detection', '0001_initial'),
+        ("disease_detection", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='diseaseprediction',
-            name='metadata',
-            field=models.JSONField(blank=True, default=dict, help_text='Stores top predictions, grad-cam heatmap, and model version'),
+            model_name="diseaseprediction",
+            name="metadata",
+            field=models.JSONField(
+                blank=True,
+                default=dict,
+                help_text="Stores top predictions, grad-cam heatmap, and model version",
+            ),
         ),
     ]
