@@ -2,6 +2,7 @@
 Dhatree AI Root Configuration Package.
 Initializes Celery app so it is automatically discovered on Django startup.
 """
+
 from __future__ import absolute_import, unicode_literals
 
 # Ensure Celery app is loaded when Django starts

@@ -14,7 +14,9 @@ Error Example:
     "errors": { ... }
 }
 """
+
 from typing import Any, Optional
+
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -70,9 +72,16 @@ def paginated_response(
     )
     paginated_data = {
         "count": count,
-        "next": paginator.get_next_link() if hasattr(paginator, "get_next_link") else None,
-        "previous": paginator.get_previous_link() if hasattr(paginator, "get_previous_link") else None,
+        "next": (
+            paginator.get_next_link() if hasattr(paginator, "get_next_link") else None
+        ),
+        "previous": (
+            paginator.get_previous_link()
+            if hasattr(paginator, "get_previous_link")
+            else None
+        ),
         "results": data,
     }
-    return success_response(data=paginated_data, message=message, status_code=status_code)
-
+    return success_response(
+        data=paginated_data, message=message, status_code=status_code
+    )

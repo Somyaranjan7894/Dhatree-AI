@@ -2,10 +2,12 @@
 Base Django settings for Dhatree AI Digital Agriculture Platform.
 Shared across development, testing, and production environments.
 """
+
 import os
 import sys
 from datetime import timedelta
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -96,7 +98,9 @@ ASGI_APPLICATION = "config.asgi.application"
 # Database Configuration (PostgreSQL via environment variables)
 # Defaults to SQLite during local test execution or when DATABASE_URL is not set
 DATABASE_URL = os.getenv("DATABASE_URL")
-is_testing = (sys.argv and len(sys.argv) > 1 and sys.argv[1] in ("test", "pytest")) or "pytest" in sys.modules
+is_testing = (
+    sys.argv and len(sys.argv) > 1 and sys.argv[1] in ("test", "pytest")
+) or "pytest" in sys.modules
 
 if is_testing and os.getenv("FORCE_POSTGRES_TESTS", "false").lower() != "true":
     DATABASES = {
@@ -171,9 +175,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    "DEFAULT_PERMISSION_CLASSES": (
-        "rest_framework.permissions.IsAuthenticated",
-    ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_PAGINATION_CLASS": "core.pagination.DhatreePageNumberPagination",
     "PAGE_SIZE": 20,
     "DEFAULT_FILTER_BACKENDS": (
@@ -212,9 +214,7 @@ SIMPLE_JWT = {
 # CORS & CSRF Settings
 CORS_ALLOWED_ORIGINS = [
     origin.strip()
-    for origin in os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:5173").split(
-        ","
-    )
+    for origin in os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:5173").split(",")
     if origin.strip()
 ]
 CORS_ALLOW_CREDENTIALS = True
@@ -226,7 +226,9 @@ CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = TIME_ZONE
-CELERY_TASK_ALWAYS_EAGER = os.getenv("CELERY_TASK_ALWAYS_EAGER", "False").lower() == "true"
+CELERY_TASK_ALWAYS_EAGER = (
+    os.getenv("CELERY_TASK_ALWAYS_EAGER", "False").lower() == "true"
+)
 
 # AI Engine Models Registry Path
 _env_model_path = os.getenv("AI_MODEL_REGISTRY_PATH")
@@ -299,4 +301,3 @@ structlog.configure(
     wrapper_class=structlog.stdlib.BoundLogger,
     cache_logger_on_first_use=True,
 )
-

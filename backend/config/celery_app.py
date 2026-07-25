@@ -1,5 +1,7 @@
 """Celery application initialization for asynchronous task processing."""
+
 import os
+
 from celery import Celery
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.development")

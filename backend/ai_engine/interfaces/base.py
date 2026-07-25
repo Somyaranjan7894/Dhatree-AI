@@ -3,8 +3,10 @@ Abstract AI/ML Interfaces.
 Ensures uniform contract across all prediction pipelines (`PredictorInterface`)
 and vision/image analysis pipelines (`AnalyzerInterface`).
 """
+
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Union
+
 import numpy as np
 
 

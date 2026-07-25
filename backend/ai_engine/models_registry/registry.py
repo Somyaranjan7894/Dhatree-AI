@@ -3,11 +3,13 @@ Thread-safe Model Registry (`ModelsRegistry`).
 Provides lazy-loading, caching, and version verification for ML/AI artifacts (`PyTorch`, `TensorFlow`, `Scikit-learn`)
 so Django server startup remains instant while keeping inference memory efficient.
 """
+
 import logging
 import os
 import threading
 from pathlib import Path
 from typing import Any, Dict, Optional
+
 from core.exceptions import ModelInferenceError
 
 logger = logging.getLogger(__name__)
@@ -27,6 +29,7 @@ class ModelsRegistry:
                 cls._instance = super().__new__(cls)
                 cls._instance._loaded_models = {}
                 from django.conf import settings
+
                 cls._instance._registry_path = Path(settings.AI_MODEL_REGISTRY_PATH)
         return cls._instance
 
@@ -50,7 +53,9 @@ class ModelsRegistry:
                 return model_artifact
             except Exception as exc:
                 logger.error(f"Failed to load AI model [{model_key}]: {exc}")
-                raise ModelInferenceError(f"Model [{model_key}] could not be loaded: {exc}")
+                raise ModelInferenceError(
+                    f"Model [{model_key}] could not be loaded: {exc}"
+                )
 
     def unload_model(self, model_key: str) -> None:
         """Unload a specific model from memory cache to free RAM/VRAM."""

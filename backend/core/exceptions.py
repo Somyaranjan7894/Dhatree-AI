@@ -2,7 +2,9 @@
 Custom API exceptions and standardized exception handler for Dhatree AI.
 Ensures every error returned by the API follows a consistent JSON schema.
 """
+
 from typing import Any, Dict, Optional
+
 from rest_framework import status
 from rest_framework.exceptions import APIException
 from rest_framework.response import Response
@@ -41,11 +43,9 @@ class ModelInferenceError(BaseDhatreeException):
     default_code = "ai_inference_error"
 
 
-from rest_framework.exceptions import (
-    AuthenticationFailed as DRFAuthenticationFailed,
-    PermissionDenied as DRFPermissionDenied,
-    ValidationError as DRFValidationError,
-)
+from rest_framework.exceptions import AuthenticationFailed as DRFAuthenticationFailed
+from rest_framework.exceptions import PermissionDenied as DRFPermissionDenied
+from rest_framework.exceptions import ValidationError as DRFValidationError
 
 
 class AuthenticationFailed(DRFAuthenticationFailed):
@@ -72,7 +72,6 @@ class ValidationError(DRFValidationError):
     default_code = "validation_error"
 
 
-
 import logging
 
 logger = logging.getLogger("dhatree.error")
@@ -97,12 +96,19 @@ def custom_exception_handler(
         error_code = getattr(exc, "default_code", "api_error")
         error_message = (
             str(exc.detail)
-            if hasattr(exc, "detail") and isinstance(exc.detail, (str, getattr(exc, "detail").__class__)) and not isinstance(exc.detail, (dict, list))
+            if hasattr(exc, "detail")
+            and isinstance(exc.detail, (str, getattr(exc, "detail").__class__))
+            and not isinstance(exc.detail, (dict, list))
             else "A validation or processing error occurred."
         )
         if hasattr(exc, "detail") and isinstance(exc.detail, str):
             error_message = exc.detail
-        elif hasattr(exc, "detail") and isinstance(exc.detail, list) and exc.detail and isinstance(exc.detail[0], str):
+        elif (
+            hasattr(exc, "detail")
+            and isinstance(exc.detail, list)
+            and exc.detail
+            and isinstance(exc.detail[0], str)
+        ):
             error_message = exc.detail[0]
         elif str(exc) and not isinstance(getattr(exc, "detail", None), (dict, list)):
             error_message = str(exc)
@@ -123,7 +129,8 @@ def custom_exception_handler(
     else:
         # Log unexpected internal exceptions without exposing tracebacks to client
         logger.exception(
-            f"Unhandled internal exception in {context.get('view')}: {exc}", exc_info=exc
+            f"Unhandled internal exception in {context.get('view')}: {exc}",
+            exc_info=exc,
         )
         response = Response(
             {

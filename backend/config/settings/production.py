@@ -2,6 +2,7 @@
 Production Django settings for Dhatree AI Digital Agriculture Platform.
 Enforces strict HTTPS, cookie security, and environment-driven host whitelisting.
 """
+
 from .base import *
 
 DEBUG = False

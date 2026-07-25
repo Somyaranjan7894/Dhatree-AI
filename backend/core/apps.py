@@ -1,4 +1,5 @@
 """Django AppConfig for Core module."""
+
 from django.apps import AppConfig
 
 

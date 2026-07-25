@@ -2,7 +2,9 @@
 Reusable Role-Based Access Control (RBAC) permission classes for Dhatree AI.
 Ensures every domain boundary can cleanly enforce role and ownership invariants.
 """
+
 from typing import Any
+
 from rest_framework.permissions import BasePermission
 from rest_framework.request import Request
 from rest_framework.views import APIView
@@ -51,9 +53,7 @@ class OwnerOnly(BasePermission):
     Checks `obj == request.user`, `obj.user == request.user`, or `obj.owner == request.user`.
     """
 
-    def has_object_permission(
-        self, request: Request, view: APIView, obj: Any
-    ) -> bool:
+    def has_object_permission(self, request: Request, view: APIView, obj: Any) -> bool:
         if not (request.user and request.user.is_authenticated):
             return False
         if getattr(request.user, "is_deleted", False):
@@ -79,5 +79,8 @@ class AdminOrReadOnly(BasePermission):
         return bool(
             request.user
             and request.user.is_authenticated
-            and (getattr(request.user, "role", "") == "admin" or request.user.is_superuser)
+            and (
+                getattr(request.user, "role", "") == "admin"
+                or request.user.is_superuser
+            )
         )

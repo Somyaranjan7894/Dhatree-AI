@@ -3,10 +3,13 @@ Abstract Base Repository Interface (`BaseRepository`).
 Enforces the Repository Pattern across all domain modules (`auth`, `farms`, `crop_recommendation`, etc.)
 to completely decouple business logic (`Services`) from direct ORM `Model.objects` calls.
 """
+
 from abc import ABC, abstractmethod
 from typing import Any, Dict, Generic, List, Optional, Type, TypeVar
+
 from django.db import models
 from django.db.models.query import QuerySet
+
 from core.exceptions import ResourceNotFoundError
 
 T = TypeVar("T", bound=models.Model)

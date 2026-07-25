@@ -2,9 +2,11 @@
 WSGI config for Dhatree AI project.
 It exposes the WSGI callable as a module-level variable named ``application``.
 """
+
 import os
 import sys
 from pathlib import Path
+
 from django.core.wsgi import get_wsgi_application
 
 # Add project root so top-level `ai` package is importable

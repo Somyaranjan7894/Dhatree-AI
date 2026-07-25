@@ -2,6 +2,7 @@
 Dhatree AI Root URL Configuration.
 Maps API routes to independent domain modules inside `modules/`.
 """
+
 from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import (
@@ -9,6 +10,7 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
+
 from core.views.health_views import LivenessView, ReadinessView
 
 urlpatterns = [
@@ -39,9 +41,7 @@ urlpatterns = [
     path("api/v1/crops/", include("modules.crops.urls", namespace="crops")),
     path(
         "api/v1/crop-recommendation/",
-        include(
-            "modules.crop_recommendation.urls", namespace="crop_recommendation"
-        ),
+        include("modules.crop_recommendation.urls", namespace="crop_recommendation"),
     ),
     path(
         "api/v1/disease-detection/",
@@ -64,9 +64,7 @@ urlpatterns = [
     ),
     path(
         "api/v1/weather-intelligence/",
-        include(
-            "modules.weather_intelligence.urls", namespace="weather_intelligence"
-        ),
+        include("modules.weather_intelligence.urls", namespace="weather_intelligence"),
     ),
     path(
         "api/v1/notifications/",

@@ -2,6 +2,7 @@
 Development Django settings for Dhatree AI Digital Agriculture Platform.
 Enables debug mode, relaxed CORS, and verbose logging.
 """
+
 from .base import *
 
 DEBUG = True

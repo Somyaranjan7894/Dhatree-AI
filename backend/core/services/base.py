@@ -3,6 +3,7 @@ Abstract Base Service Interface (`BaseService`).
 Enforces the Service Layer Pattern: all domain logic, transaction boundaries, orchestration, and validation
 must reside in Service classes rather than inside Django DRF API views or Serializers.
 """
+
 import logging
 from abc import ABC
 from typing import Any, Dict, Optional

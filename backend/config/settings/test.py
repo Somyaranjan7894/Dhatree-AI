@@ -2,6 +2,7 @@
 Testing Django settings for Dhatree AI Digital Agriculture Platform.
 Uses fast password hashers and in-memory caching to maximize test speed.
 """
+
 from .base import *
 
 DEBUG = False
