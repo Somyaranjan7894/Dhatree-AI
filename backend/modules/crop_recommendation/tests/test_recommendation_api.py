@@ -1,7 +1,8 @@
 import pytest
-from rest_framework.test import APIClient
-from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.urls import reverse
+from rest_framework.test import APIClient
+
 User = get_user_model()
 
 
@@ -35,6 +36,7 @@ def test_crop_recommendation_flow(api_client, test_user):
 
     import os
     import sys
+
     from django.conf import settings
 
     root_dir = os.path.abspath(os.path.join(settings.BASE_DIR, ".."))
