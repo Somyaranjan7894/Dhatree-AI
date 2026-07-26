@@ -109,7 +109,10 @@ if is_testing and os.getenv("FORCE_POSTGRES_TESTS", "false").lower() != "true":
             "NAME": BASE_DIR / "test_db.sqlite3",
         }
     }
-elif DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+elif DATABASE_URL and (
+    DATABASE_URL.startswith("postgres://")
+    or DATABASE_URL.startswith("postgresql://")
+):
     import urllib.parse as urlparse
 
     url = urlparse.urlparse(DATABASE_URL)
@@ -122,6 +125,9 @@ elif DATABASE_URL and DATABASE_URL.startswith("postgres://"):
             "HOST": url.hostname,
             "PORT": url.port or 5432,
             "CONN_MAX_AGE": 600,
+            "OPTIONS": {
+                "sslmode": "require",
+            },
         }
     }
 else:

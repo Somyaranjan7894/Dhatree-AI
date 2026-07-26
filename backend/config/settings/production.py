@@ -14,7 +14,10 @@ ALLOWED_HOSTS = [
 ]
 
 # Strict Security & HTTPS Headers
-SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "True").lower() == "true"
+# Render terminates TLS at the proxy; do NOT set SECURE_SSL_REDIRECT=True
+# or Django will loop. Instead, trust Render's X-Forwarded-Proto header.
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "False").lower() == "true"
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
