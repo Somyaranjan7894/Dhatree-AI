@@ -1,9 +1,9 @@
 # ==============================================================================
-# Dhatree AI Backend Multi-Stage Dockerfile (Python 3.13)
+# Dhatree AI Backend Multi-Stage Dockerfile (Python 3.11)
 # ==============================================================================
 
 # Build Stage
-FROM python:3.13-slim as builder
+FROM python:3.11-slim as builder
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
@@ -20,7 +20,7 @@ RUN pip install --upgrade pip && \
     pip wheel --no-cache-dir --no-deps --wheel-dir /build/wheels -r requirements/prod.txt
 
 # Final Stage
-FROM python:3.13-slim
+FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
