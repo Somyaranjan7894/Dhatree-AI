@@ -19,37 +19,23 @@ class DiseasePredictionService:
         Runs the actual AI model inference.
         """
         try:
-            from ai.disease_detection_backup.predict import DiseasePredictor
-
-            # Paths relative to the project root
-            project_root = settings.BASE_DIR.parent
-            model_path = (
-                project_root
-                / "ai"
-                / "models"
-                / "disease_detection"
-                / "disease_production_best.keras"
-            )
-            class_names_path = (
-                project_root
-                / "ai"
-                / "models"
-                / "disease_detection"
-                / "class_names.json"
-            )
-
-            if not model_path.exists():
-                return "Model Not Found", 0.0, {"error": "Production model missing"}
-
-            predictor = DiseasePredictor(str(model_path), str(class_names_path))
-            result = predictor.predict_image(str(image_path))
-
-            if result.get("success"):
+            from ai_engine.pipelines.disease_detection.pipeline import DiseaseDetectionPipeline
+            
+            pipeline = DiseaseDetectionPipeline()
+            
+            with open(image_path, "rb") as f:
+                image_bytes = f.read()
+                
+            features = pipeline.preprocess_image(image_bytes)
+            result = pipeline.analyze(features)
+            
+            if result["status"] == "success":
+                pred = result["analysis"]
                 metadata = {
-                    "top_predictions": result.get("top_predictions", []),
-                    "heatmap_base64": result.get("heatmap_base64", None),
+                    "top_predictions": result.get("note", ""),
+                    "heatmap_base64": pred.get("affected_region_bbox", None),
                 }
-                return result.get("predicted_class"), result.get("confidence"), metadata
+                return pred.get("detected_disease", "Unknown"), pred.get("confidence_score", 0.0), metadata
             else:
                 return "Inference Error", 0.0, {"error": result.get("error")}
         except Exception as e:

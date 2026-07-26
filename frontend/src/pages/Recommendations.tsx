@@ -165,7 +165,7 @@ export const Recommendations: React.FC = () => {
             
             {activeTab === 'crop' && (
               <form onSubmit={handleCropSubmit} className="space-y-4">
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">Nitrogen (N)</label>
                     <input type="number" name="nitrogen" value={cropFormData.nitrogen} onChange={handleCropInputChange} min="0" max="300" step="0.1" className="w-full rounded-lg border-slate-300 border p-2 focus:border-emerald-500 focus:ring-emerald-500" required />
@@ -180,7 +180,7 @@ export const Recommendations: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">Soil pH</label>
                     <input type="number" name="ph" value={cropFormData.ph} onChange={handleCropInputChange} min="0" max="14" step="0.1" className="w-full rounded-lg border-slate-300 border p-2 focus:border-emerald-500 focus:ring-emerald-500" required />
@@ -191,7 +191,7 @@ export const Recommendations: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">Humidity (%)</label>
                     <input type="number" name="humidity" value={cropFormData.humidity} onChange={handleCropInputChange} min="0" max="100" step="0.1" className="w-full rounded-lg border-slate-300 border p-2 focus:border-emerald-500 focus:ring-emerald-500" required />

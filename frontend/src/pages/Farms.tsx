@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button } from "@/components/common";
+import { Card, Button, Modal, Input } from "@/components/common";
 import { EmptyState } from "@/components/feedback/EmptyState";
 import { Sprout, Plus, MapPin } from "lucide-react";
 import { farmService } from "@/api/farm.service";
@@ -9,6 +9,16 @@ import { useNavigate } from "react-router-dom";
 export const Farms: React.FC = () => {
   const [farms, setFarms] = useState<Farm[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [newFarm, setNewFarm] = useState({
+    farm_name: "",
+    area: "",
+    village: "",
+    district: "",
+    state: "",
+    water_source: "rainfed"
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,6 +33,32 @@ export const Farms: React.FC = () => {
       console.error("Failed to fetch farms", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleCreateFarm = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      await farmService.createFarm({
+        ...newFarm,
+        area: parseFloat(newFarm.area) || 0,
+      });
+      setIsModalOpen(false);
+      setNewFarm({
+        farm_name: "",
+        area: "",
+        village: "",
+        district: "",
+        state: "",
+        water_source: "rainfed"
+      });
+      await fetchFarms();
+    } catch (error: any) {
+      console.error("Failed to create farm", error?.response?.data || error);
+      alert(`Failed to create farm: ${JSON.stringify(error?.response?.data || "Check inputs")}`);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -45,10 +81,7 @@ export const Farms: React.FC = () => {
         <Button
           variant="primary"
           leftIcon={<Plus className="w-4 h-4" />}
-          onClick={() => {
-            // Future feature: create new farm
-            alert("Create new farm feature coming soon");
-          }}
+          onClick={() => setIsModalOpen(true)}
         >
           Register New Farm Parcel
         </Button>
@@ -61,7 +94,7 @@ export const Farms: React.FC = () => {
             title="No Active Farm Parcels Loaded"
             description="You don't have any registered farms yet."
             actionLabel="Register Farm"
-            onAction={() => alert("Create new farm feature coming soon")}
+            onAction={() => setIsModalOpen(true)}
           />
         </Card>
       ) : (
@@ -76,13 +109,94 @@ export const Farms: React.FC = () => {
               </div>
               <div className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
                 <p><span className="font-medium">Location:</span> {farm.village}, {farm.district}, {farm.state}</p>
-                <p><span className="font-medium">Soil Type:</span> {farm.soil_type}</p>
+                {farm.soil_type && <p><span className="font-medium">Soil Type:</span> {farm.soil_type}</p>}
                 <p><span className="font-medium">Water Source:</span> {farm.water_source}</p>
               </div>
             </Card>
           ))}
         </div>
       )}
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Register New Farm Parcel"
+        description="Add a new farm to manage crops, track soil health, and receive recommendations."
+      >
+        <form onSubmit={handleCreateFarm} className="space-y-4 mt-4">
+          <Input
+            label="Farm Name"
+            placeholder="e.g., North Field"
+            value={newFarm.farm_name}
+            onChange={(e) => setNewFarm({ ...newFarm, farm_name: e.target.value })}
+            required
+          />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Input
+              label="Area (Acres)"
+              type="number"
+              step="0.01"
+              placeholder="e.g., 10.5"
+              value={newFarm.area}
+              onChange={(e) => setNewFarm({ ...newFarm, area: e.target.value })}
+              required
+            />
+            <Input
+              label="Village / Town"
+              placeholder="e.g., Kothapalli"
+              value={newFarm.village}
+              onChange={(e) => setNewFarm({ ...newFarm, village: e.target.value })}
+              required
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Input
+              label="District"
+              placeholder="e.g., Karimnagar"
+              value={newFarm.district}
+              onChange={(e) => setNewFarm({ ...newFarm, district: e.target.value })}
+              required
+            />
+            <Input
+              label="State"
+              placeholder="e.g., Telangana"
+              value={newFarm.state}
+              onChange={(e) => setNewFarm({ ...newFarm, state: e.target.value })}
+              required
+            />
+          </div>
+
+          <div className="space-y-1">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+              Water Source
+            </label>
+            <select
+              className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 dark:border-forest-light dark:bg-forest-medium dark:text-white"
+              value={newFarm.water_source}
+              onChange={(e) => setNewFarm({ ...newFarm, water_source: e.target.value })}
+            >
+              <option value="rainfed">Rainfed / Monsoon</option>
+              <option value="canal">Canal Irrigation</option>
+              <option value="tube_well">Tube Well / Borewell</option>
+              <option value="open_well">Open Well</option>
+              <option value="drip_irrigation">Drip Irrigation System</option>
+              <option value="sprinkler">Sprinkler Irrigation System</option>
+              <option value="other">Other / Mixed</option>
+            </select>
+          </div>
+
+          <div className="pt-4 flex justify-end gap-3 border-t border-slate-100 dark:border-forest-light">
+            <Button variant="outline" type="button" onClick={() => setIsModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button variant="primary" type="submit" isLoading={isSubmitting}>
+              Register Farm
+            </Button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 };

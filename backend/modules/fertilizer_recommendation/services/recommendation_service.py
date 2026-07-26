@@ -1,7 +1,7 @@
 import logging
 from typing import Any, Dict
 
-from ai.fertilizer_recommendation.predict import FertilizerPredictor
+from ai_engine.pipelines.fertilizer_recommendation.pipeline import FertilizerRecommendationPipeline
 
 from modules.fertilizer_recommendation.models.recommendation import (
     FertilizerRecommendation,
@@ -15,9 +15,9 @@ def get_predictor():
     global predictor_instance
     if predictor_instance is None:
         try:
-            predictor_instance = FertilizerPredictor()
+            predictor_instance = FertilizerRecommendationPipeline()
         except Exception as e:
-            logger.error(f"Failed to initialize FertilizerPredictor: {e}")
+            logger.error(f"Failed to initialize FertilizerRecommendationPipeline: {e}")
             raise
     return predictor_instance
 
@@ -47,9 +47,19 @@ class FertilizerRecommendationService:
         confidence_threshold = data.get("confidence_threshold", 0.5)
 
         # Run inference
-        prediction_result = predictor.predict(
-            ai_inputs, confidence_threshold=confidence_threshold
-        )
+        features = predictor.preprocess(ai_inputs)
+        result = predictor.predict(features)
+        
+        if result["status"] == "success":
+            prediction_result = result["prediction"]
+            explanation = result.get("note", "")
+        else:
+            prediction_result = {
+                "recommended_fertilizer": "Unknown",
+                "dosage_kg_per_hectare": 0.0,
+                "application_method": "Unknown"
+            }
+            explanation = "Error: " + result.get("error", "Unknown error")
 
         # Build metadata
         metadata = {
@@ -72,8 +82,8 @@ class FertilizerRecommendationService:
             soil_type=data.get("soil_type", "Unknown"),
             recommended_fertilizer=prediction_result.get("recommended_fertilizer"),
             confidence_score=prediction_result.get("confidence_score", 0.0),
-            explanation=prediction_result.get("explanation"),
-            application_guidance=prediction_result.get("application_guidance"),
+            explanation=explanation,
+            application_guidance=prediction_result.get("application_method"),
             warnings=prediction_result.get("warnings"),
             metadata=metadata,
         )

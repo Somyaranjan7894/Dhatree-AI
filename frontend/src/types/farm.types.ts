@@ -18,11 +18,14 @@ export interface FarmCrop {
   id: string;
   farm: string;
   crop: string;
+  crop_name?: string;
   sowing_date: string;
   expected_harvest_date: string | null;
   actual_harvest_date: string | null;
   yield_quantity: number | null;
+  area_allocated: number | null;
   status: string;
+  status_display?: string;
 }
 
 export interface SoilSample {

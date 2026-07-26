@@ -195,7 +195,7 @@ export const DiseaseDetection: React.FC = () => {
                   </div>
                 )}
 
-                {prediction.metadata?.top_predictions && prediction.metadata.top_predictions.length > 1 && (
+                {Array.isArray(prediction.metadata?.top_predictions) && prediction.metadata.top_predictions.length > 1 && (
                   <div>
                     <h3 className="text-sm font-semibold text-slate-700 mb-2 uppercase tracking-wider">Top Alternatives</h3>
                     <ul className="space-y-2">

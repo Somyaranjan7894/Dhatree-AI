@@ -17,7 +17,7 @@ class AnalyticsService:
         six_months_ago = now - timedelta(days=180)
 
         # 1. Disease Frequency
-        diseases_qs = DiseasePrediction.active_objects.filter(
+        diseases_qs = DiseasePrediction.objects.filter(
             user=user, confidence_score__gte=0.6
         )
         disease_freq = list(
@@ -34,7 +34,7 @@ class AnalyticsService:
 
         # 2. Monthly Scans Trend
         monthly_scans = list(
-            DiseasePrediction.active_objects.filter(
+            DiseasePrediction.objects.filter(
                 user=user, created_at__gte=six_months_ago
             )
             .annotate(month=TruncMonth("created_at"))
@@ -68,7 +68,7 @@ class AnalyticsService:
                 "You have a high scan rate this month. Consistent monitoring helps catch diseases early."
             )
 
-        crop_recs_count = CropRecommendation.active_objects.filter(user=user).count()
+        crop_recs_count = CropRecommendation.objects.filter(user=user).count()
         if crop_recs_count == 0:
             insights.append(
                 "You haven't used the Crop Recommendation AI yet. Try it out to discover optimal crops for your soil."

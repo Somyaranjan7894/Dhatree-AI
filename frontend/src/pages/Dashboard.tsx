@@ -56,7 +56,7 @@ export const Dashboard: React.FC = () => {
       )}
 
       {/* High Level Metrics */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-5 flex items-center justify-between hover:shadow-md transition-shadow">
           <div>
             <p className="text-sm text-slate-500 font-medium mb-1">Active Farms</p>

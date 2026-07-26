@@ -6,6 +6,7 @@ import { Layout } from "@/components/layout";
 import { Suspense, lazy } from "react";
 
 // Lazy load pages for code splitting
+const Landing = lazy(() => import("@/pages").then(m => ({ default: m.Landing })));
 const Dashboard = lazy(() => import("@/pages").then(m => ({ default: m.Dashboard })));
 const Recommendations = lazy(() => import("@/pages").then(m => ({ default: m.Recommendations })));
 const DiseaseDetection = lazy(() => import("@/pages").then(m => ({ default: m.DiseaseDetection })));
@@ -40,23 +41,24 @@ export const App: React.FC = () => {
         <BrowserRouter>
           <Suspense fallback={<div className="flex h-screen items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div></div>}>
             <Routes>
+              {/* Public Landing Page */}
+              <Route path="/" element={<Landing />} />
+
               {/* Public Authentication Routes */}
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
 
               {/* Application Main Layout & Routes */}
-              <Route path="/" element={<Layout />}>
-                <Route index element={<Dashboard />} />
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="ai-assistant" element={<AIAssistant />} />
-                <Route path="reports" element={<Reports />} />
-                <Route path="notifications" element={<Notifications />} />
-                <Route path="recommendations" element={<Recommendations />} />
-                <Route path="disease-detection" element={<DiseaseDetection />} />
-                <Route path="weather" element={<Weather />} />
-
+              <Route element={<Layout />}>
                 {/* Protected Routes Requiring Authentication/Roles */}
                 <Route element={<ProtectedRoute />}>
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="ai-assistant" element={<AIAssistant />} />
+                  <Route path="reports" element={<Reports />} />
+                  <Route path="notifications" element={<Notifications />} />
+                  <Route path="recommendations" element={<Recommendations />} />
+                  <Route path="disease-detection" element={<DiseaseDetection />} />
+                  <Route path="weather" element={<Weather />} />
                   <Route path="profile" element={<Profile />} />
                 </Route>
 

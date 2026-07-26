@@ -14,11 +14,11 @@ export const diseaseDetectionService = {
         'Content-Type': 'multipart/form-data',
       },
     }) as any;
-    return response.data;
+    return response.data || response;
   },
 
   getPredictionHistory: async (): Promise<DiseasePrediction[]> => {
     const response = await apiClient.get<DiseasePrediction[]>('/disease-detection/predictions/') as any;
-    return response.data;
+    return response.data?.results || response.results || response.data || response || [];
   },
 };

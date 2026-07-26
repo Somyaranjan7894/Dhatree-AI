@@ -13,24 +13,31 @@ class CropRecommendationService:
         self.repository = CropRecommendationRepository()
 
     def predict_crop(self, user, data, farm=None):
-        # We need to invoke the AI module. Since it's in the Django path, we can import it directly.
-        # But to keep decoupled, we import it inside the method or add the root path if necessary.
-
-        root_dir = os.path.abspath(os.path.join(settings.BASE_DIR, ".."))
-        if root_dir not in sys.path:
-            sys.path.insert(0, root_dir)
-
-        from ai.crop_recommendation.predict import predict_crop
-
-        result = predict_crop(
-            n=data["nitrogen"],
-            p=data["phosphorus"],
-            k=data["potassium"],
-            temperature=data["temperature"],
-            humidity=data["humidity"],
-            ph=data["ph"],
-            rainfall=data["rainfall"],
-        )
+        from ai_engine.pipelines.crop_recommendation.pipeline import CropRecommendationPipeline
+        
+        pipeline = CropRecommendationPipeline()
+        features = pipeline.preprocess({
+            "nitrogen": data["nitrogen"],
+            "phosphorus": data["phosphorus"],
+            "potassium": data["potassium"],
+            "temperature": data["temperature"],
+            "humidity": data["humidity"],
+            "ph": data["ph"],
+            "rainfall": data["rainfall"],
+        })
+        result = pipeline.predict(features)
+        
+        if result["status"] == "success":
+            pred_data = result["prediction"]
+            recommended_crop = pred_data.get("recommended_crop")
+            confidence_score = pred_data.get("confidence_score", 0.0)
+            alternatives = pred_data.get("alternatives", [])
+            explanation = result.get("note", "")
+        else:
+            recommended_crop = "Unknown"
+            confidence_score = 0.0
+            alternatives = []
+            explanation = "Error: " + result.get("error", "Unknown error")
 
         # Save to DB
         prediction = self.repository.create(
@@ -43,10 +50,10 @@ class CropRecommendationService:
             temperature=data["temperature"],
             humidity=data["humidity"],
             rainfall=data["rainfall"],
-            recommended_crop=result["recommended_crop"],
-            confidence_score=result["confidence_score"],
-            alternatives=result["alternatives"],
-            explanation=result["explanation"],
+            recommended_crop=recommended_crop,
+            confidence_score=confidence_score,
+            alternatives=alternatives,
+            explanation=explanation,
             model_version="v1.0-RF",
         )
 

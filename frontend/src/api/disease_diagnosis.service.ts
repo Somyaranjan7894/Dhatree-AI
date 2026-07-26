@@ -3,12 +3,12 @@ import { DiseaseKnowledge } from '../types/disease_diagnosis.types';
 
 export const diseaseDiagnosisService = {
   getDiseaseKnowledge: async (diseaseIdOrName: string): Promise<DiseaseKnowledge> => {
-    const response = await apiClient.get(`/disease_diagnosis/knowledge/${diseaseIdOrName}/`);
+    const response = await apiClient.get(`/disease-diagnosis/knowledge/${diseaseIdOrName}/`);
     return response as unknown as DiseaseKnowledge;
   },
 
   searchDiseases: async (query?: string, crop?: string, severity?: string): Promise<DiseaseKnowledge[]> => {
-    let url = '/disease_diagnosis/knowledge/';
+    let url = '/disease-diagnosis/knowledge/';
     const params = new URLSearchParams();
     
     if (query) params.append('search', query);

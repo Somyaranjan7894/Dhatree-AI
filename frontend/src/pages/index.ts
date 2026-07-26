@@ -14,3 +14,4 @@ export * from "./UserDirectory";
 export * from "./Profile";
 export * from "./FarmDetails";
 export * from "./SoilRecords";
+export * from "./Landing";

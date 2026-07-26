@@ -14,7 +14,7 @@ export const notificationService = {
   getNotifications: async (): Promise<Notification[]> => {
     const response = await apiClient.get('/notifications/');
     const res = response as any;
-    return res.results || res;
+    return res.data || res.results || res;
   },
 
   markAsRead: async (id: string): Promise<Notification> => {

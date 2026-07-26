@@ -1,0 +1,730 @@
+[
+    {
+        "name": "Apple___Apple_scab",
+        "crop": "Apple",
+        "description": "Apple scab is a common agricultural disease affecting Apple plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Apple.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Apple.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Apple___Black_rot",
+        "crop": "Apple",
+        "description": "Black rot is a common agricultural disease affecting Apple plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Apple.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Apple.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Apple___Cedar_apple_rust",
+        "crop": "Apple",
+        "description": "Cedar apple rust is a common agricultural disease affecting Apple plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Apple.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Apple.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Cherry_(including_sour)___Powdery_mildew",
+        "crop": "Cherry",
+        "description": "Powdery mildew is a common agricultural disease affecting Cherry plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Cherry.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Cherry.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
+        "crop": "Corn",
+        "description": "Cercospora leaf spot Gray leaf spot is a common agricultural disease affecting Corn plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Corn.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Corn.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Corn_(maize)___Common_rust_",
+        "crop": "Corn",
+        "description": "Common rust is a common agricultural disease affecting Corn plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Corn.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Corn.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Corn_(maize)___Northern_Leaf_Blight",
+        "crop": "Corn",
+        "description": "Northern Leaf Blight is a common agricultural disease affecting Corn plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Corn.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Corn.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Grape___Black_rot",
+        "crop": "Grape",
+        "description": "Black rot is a common agricultural disease affecting Grape plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Grape.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Grape.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Grape___Esca_(Black_Measles)",
+        "crop": "Grape",
+        "description": "Esca (Black Measles) is a common agricultural disease affecting Grape plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Grape.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Grape.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)",
+        "crop": "Grape",
+        "description": "Leaf blight (Isariopsis Leaf Spot) is a common agricultural disease affecting Grape plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Grape.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Grape.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Orange___Haunglongbing_(Citrus_greening)",
+        "crop": "Orange",
+        "description": "Haunglongbing (Citrus greening) is a common agricultural disease affecting Orange plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Orange.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Orange.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Peach___Bacterial_spot",
+        "crop": "Peach",
+        "description": "Bacterial spot is a common agricultural disease affecting Peach plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Peach.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Peach.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Pepper,_bell___Bacterial_spot",
+        "crop": "Pepper, bell",
+        "description": "Bacterial spot is a common agricultural disease affecting Pepper, bell plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Pepper, bell.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Pepper, bell.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Potato___Early_blight",
+        "crop": "Potato",
+        "description": "Early blight is a common agricultural disease affecting Potato plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Potato.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Potato.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Potato___Late_blight",
+        "crop": "Potato",
+        "description": "Late blight is a common agricultural disease affecting Potato plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Potato.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Potato.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Squash___Powdery_mildew",
+        "crop": "Squash",
+        "description": "Powdery mildew is a common agricultural disease affecting Squash plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Squash.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Squash.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Strawberry___Leaf_scorch",
+        "crop": "Strawberry",
+        "description": "Leaf scorch is a common agricultural disease affecting Strawberry plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Strawberry.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Strawberry.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Tomato___Bacterial_spot",
+        "crop": "Tomato",
+        "description": "Bacterial spot is a common agricultural disease affecting Tomato plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Tomato.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Tomato.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Tomato___Early_blight",
+        "crop": "Tomato",
+        "description": "Early blight is a common agricultural disease affecting Tomato plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Tomato.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Tomato.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Tomato___Late_blight",
+        "crop": "Tomato",
+        "description": "Late blight is a common agricultural disease affecting Tomato plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Tomato.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Tomato.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Tomato___Leaf_Mold",
+        "crop": "Tomato",
+        "description": "Leaf Mold is a common agricultural disease affecting Tomato plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Tomato.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Tomato.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Tomato___Septoria_leaf_spot",
+        "crop": "Tomato",
+        "description": "Septoria leaf spot is a common agricultural disease affecting Tomato plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Tomato.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Tomato.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Tomato___Spider_mites Two-spotted_spider_mite",
+        "crop": "Tomato",
+        "description": "Spider mites Two-spotted spider mite is a common agricultural disease affecting Tomato plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Tomato.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Tomato.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Tomato___Target_Spot",
+        "crop": "Tomato",
+        "description": "Target Spot is a common agricultural disease affecting Tomato plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Tomato.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Tomato.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+        "crop": "Tomato",
+        "description": "Tomato Yellow Leaf Curl Virus is a common agricultural disease affecting Tomato plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Tomato.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Tomato.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    },
+    {
+        "name": "Tomato___Tomato_mosaic_virus",
+        "crop": "Tomato",
+        "description": "Tomato mosaic virus is a common agricultural disease affecting Tomato plants, causing significant yield losses if left unmanaged.",
+        "symptoms": "Visual symptoms include irregular spotting, discoloration, or structural damage on the leaves and sometimes fruit of the Tomato.",
+        "severity": "Medium",
+        "treatments": [
+            {
+                "type": "Chemical",
+                "method": "Apply appropriate broad-spectrum fungicide or bactericide approved for Tomato.",
+                "application_frequency": "Every 7-14 days as per label instructions.",
+                "safety_precautions": "Wear PPE. Observe harvest intervals."
+            },
+            {
+                "type": "Organic",
+                "method": "Apply neem oil, copper fungicides, or biological control agents.",
+                "application_frequency": "Weekly during early disease onset.",
+                "safety_precautions": "Apply during early morning or late evening to prevent leaf burn."
+            }
+        ],
+        "preventions": [
+            {
+                "measure": "Ensure proper spacing for air circulation and practice crop rotation.",
+                "timing": "Pre-planting"
+            }
+        ],
+        "references": []
+    }
+]

@@ -16,6 +16,7 @@ export const Notifications: React.FC = () => {
   const fetchNotifications = async () => {
     try {
       const data = await notificationService.getNotifications();
+      console.log("Fetched notifications raw:", data);
       setNotifications(data);
     } catch (error) {
       console.error("Failed to fetch notifications", error);
@@ -53,7 +54,7 @@ export const Notifications: React.FC = () => {
         </h1>
       </div>
 
-      {notifications.length === 0 ? (
+      {(!Array.isArray(notifications) || notifications.length === 0) ? (
         <Card className="p-6">
           <EmptyState
             icon={<Bell className="w-8 h-8" />}

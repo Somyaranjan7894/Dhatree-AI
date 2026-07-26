@@ -3,7 +3,7 @@ import { ENDPOINTS } from "./endpoints";
 
 export const cropService = {
   getCrops: async () => {
-    const response = await apiClient.get<{ data: any[] }>(ENDPOINTS.CROPS.LIST);
-    return response.data.data;
+    const response: any = await apiClient.get(ENDPOINTS.CROPS.LIST);
+    return response.data || response;
   },
 };

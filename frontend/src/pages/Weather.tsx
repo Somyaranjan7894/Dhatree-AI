@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Card, Button } from "@/components/common";
+import { Card, Button, Modal, Input } from "@/components/common";
 import { farmService } from "@/api/farm.service";
 import { WeatherSnapshot } from "@/types";
 import { ArrowLeft, CloudRain, Wind, Thermometer } from "lucide-react";
@@ -11,6 +11,16 @@ export const Weather: React.FC = () => {
   const navigate = useNavigate();
   const [snapshots, setSnapshots] = useState<WeatherSnapshot[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [newSnapshot, setNewSnapshot] = useState({
+    date: new Date().toISOString().split("T")[0],
+    temperature: "",
+    humidity: "",
+    rainfall: "",
+    wind_speed: "",
+  });
 
   useEffect(() => {
     if (id) {
@@ -29,6 +39,36 @@ export const Weather: React.FC = () => {
       console.error("Failed to fetch weather snapshots", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleRecordSnapshot = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!id) return;
+    
+    setIsSubmitting(true);
+    try {
+      await farmService.addWeatherSnapshot(id, {
+        date: newSnapshot.date,
+        temperature: newSnapshot.temperature ? parseFloat(newSnapshot.temperature) : null,
+        humidity: newSnapshot.humidity ? parseFloat(newSnapshot.humidity) : null,
+        rainfall: newSnapshot.rainfall ? parseFloat(newSnapshot.rainfall) : null,
+        wind_speed: newSnapshot.wind_speed ? parseFloat(newSnapshot.wind_speed) : null,
+      });
+      setIsModalOpen(false);
+      setNewSnapshot({
+        date: new Date().toISOString().split("T")[0],
+        temperature: "",
+        humidity: "",
+        rainfall: "",
+        wind_speed: "",
+      });
+      await fetchWeatherSnapshots(id);
+    } catch (error) {
+      console.error("Failed to record weather snapshot", error);
+      alert("Failed to record snapshot. Please check your inputs.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -67,7 +107,7 @@ export const Weather: React.FC = () => {
           </h1>
         </div>
         {id && (
-          <Button variant="primary" onClick={() => alert("Add snapshot feature coming soon")}>
+          <Button variant="primary" onClick={() => setIsModalOpen(true)}>
             Record Snapshot
           </Button>
         )}
@@ -80,7 +120,7 @@ export const Weather: React.FC = () => {
             title="No Weather Snapshots"
             description="No weather snapshots have been recorded for this farm yet."
             actionLabel="Record Snapshot"
-            onAction={() => alert("Add snapshot feature coming soon")}
+            onAction={() => setIsModalOpen(true)}
           />
         </Card>
       ) : (
@@ -113,6 +153,70 @@ export const Weather: React.FC = () => {
           ))}
         </div>
       )}
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Record Weather Snapshot"
+        description="Log current or past weather conditions for this farm."
+      >
+        <form onSubmit={handleRecordSnapshot} className="space-y-4 mt-4">
+          <Input
+            label="Date"
+            type="date"
+            value={newSnapshot.date}
+            onChange={(e) => setNewSnapshot({ ...newSnapshot, date: e.target.value })}
+            required
+          />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Input
+              label="Temperature (°C)"
+              type="number"
+              step="0.1"
+              placeholder="e.g., 28.5"
+              value={newSnapshot.temperature}
+              onChange={(e) => setNewSnapshot({ ...newSnapshot, temperature: e.target.value })}
+            />
+            <Input
+              label="Humidity (%)"
+              type="number"
+              step="1"
+              placeholder="e.g., 65"
+              value={newSnapshot.humidity}
+              onChange={(e) => setNewSnapshot({ ...newSnapshot, humidity: e.target.value })}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Input
+              label="Rainfall (mm)"
+              type="number"
+              step="0.1"
+              placeholder="e.g., 12.0"
+              value={newSnapshot.rainfall}
+              onChange={(e) => setNewSnapshot({ ...newSnapshot, rainfall: e.target.value })}
+            />
+            <Input
+              label="Wind Speed (km/h)"
+              type="number"
+              step="0.1"
+              placeholder="e.g., 15.5"
+              value={newSnapshot.wind_speed}
+              onChange={(e) => setNewSnapshot({ ...newSnapshot, wind_speed: e.target.value })}
+            />
+          </div>
+
+          <div className="pt-4 flex justify-end gap-3 border-t border-slate-100 dark:border-forest-light">
+            <Button variant="outline" type="button" onClick={() => setIsModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button variant="primary" type="submit" isLoading={isSubmitting}>
+              Save Snapshot
+            </Button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 };
