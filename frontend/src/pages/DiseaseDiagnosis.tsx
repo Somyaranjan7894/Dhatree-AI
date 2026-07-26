@@ -17,6 +17,7 @@ export const DiseaseDiagnosis: React.FC = () => {
 
   useEffect(() => {
     handleSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cropFilter, severityFilter]);
 
   const handleSearch = async () => {

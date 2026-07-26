@@ -13,20 +13,24 @@ class CropRecommendationService:
         self.repository = CropRecommendationRepository()
 
     def predict_crop(self, user, data, farm=None):
-        from ai_engine.pipelines.crop_recommendation.pipeline import CropRecommendationPipeline
-        
+        from ai_engine.pipelines.crop_recommendation.pipeline import (
+            CropRecommendationPipeline,
+        )
+
         pipeline = CropRecommendationPipeline()
-        features = pipeline.preprocess({
-            "nitrogen": data["nitrogen"],
-            "phosphorus": data["phosphorus"],
-            "potassium": data["potassium"],
-            "temperature": data["temperature"],
-            "humidity": data["humidity"],
-            "ph": data["ph"],
-            "rainfall": data["rainfall"],
-        })
+        features = pipeline.preprocess(
+            {
+                "nitrogen": data["nitrogen"],
+                "phosphorus": data["phosphorus"],
+                "potassium": data["potassium"],
+                "temperature": data["temperature"],
+                "humidity": data["humidity"],
+                "ph": data["ph"],
+                "rainfall": data["rainfall"],
+            }
+        )
         result = pipeline.predict(features)
-        
+
         if result["status"] == "success":
             pred_data = result["prediction"]
             recommended_crop = pred_data.get("recommended_crop")

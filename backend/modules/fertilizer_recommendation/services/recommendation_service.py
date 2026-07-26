@@ -1,8 +1,9 @@
 import logging
 from typing import Any, Dict
 
-from ai_engine.pipelines.fertilizer_recommendation.pipeline import FertilizerRecommendationPipeline
-
+from ai_engine.pipelines.fertilizer_recommendation.pipeline import (
+    FertilizerRecommendationPipeline,
+)
 from modules.fertilizer_recommendation.models.recommendation import (
     FertilizerRecommendation,
 )
@@ -49,7 +50,7 @@ class FertilizerRecommendationService:
         # Run inference
         features = predictor.preprocess(ai_inputs)
         result = predictor.predict(features)
-        
+
         if result["status"] == "success":
             prediction_result = result["prediction"]
             explanation = result.get("note", "")
@@ -57,7 +58,7 @@ class FertilizerRecommendationService:
             prediction_result = {
                 "recommended_fertilizer": "Unknown",
                 "dosage_kg_per_hectare": 0.0,
-                "application_method": "Unknown"
+                "application_method": "Unknown",
             }
             explanation = "Error: " + result.get("error", "Unknown error")
 

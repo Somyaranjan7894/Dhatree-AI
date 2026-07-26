@@ -8,6 +8,7 @@ exclude = '''
   | \.mypy_cache
   | \.pytest_cache
   | \.venv
+  | venv
   | __pycache__
   | migrations
 )/
@@ -16,7 +17,7 @@ exclude = '''
 [tool.isort]
 profile = "black"
 line_length = 88
-skip = ["migrations", ".venv", "__pycache__"]
+skip = ["migrations", ".venv", "venv", "__pycache__"]
 known_first_party = ["config", "core", "modules", "ai_engine"]
 
 [tool.pytest.ini_options]

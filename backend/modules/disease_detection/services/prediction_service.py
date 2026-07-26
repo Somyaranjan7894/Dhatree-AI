@@ -19,23 +19,29 @@ class DiseasePredictionService:
         Runs the actual AI model inference.
         """
         try:
-            from ai_engine.pipelines.disease_detection.pipeline import DiseaseDetectionPipeline
-            
+            from ai_engine.pipelines.disease_detection.pipeline import (
+                DiseaseDetectionPipeline,
+            )
+
             pipeline = DiseaseDetectionPipeline()
-            
+
             with open(image_path, "rb") as f:
                 image_bytes = f.read()
-                
+
             features = pipeline.preprocess_image(image_bytes)
             result = pipeline.analyze(features)
-            
+
             if result["status"] == "success":
                 pred = result["analysis"]
                 metadata = {
                     "top_predictions": result.get("note", ""),
                     "heatmap_base64": pred.get("affected_region_bbox", None),
                 }
-                return pred.get("detected_disease", "Unknown"), pred.get("confidence_score", 0.0), metadata
+                return (
+                    pred.get("detected_disease", "Unknown"),
+                    pred.get("confidence_score", 0.0),
+                    metadata,
+                )
             else:
                 return "Inference Error", 0.0, {"error": result.get("error")}
         except Exception as e:

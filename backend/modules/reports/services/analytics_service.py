@@ -34,9 +34,7 @@ class AnalyticsService:
 
         # 2. Monthly Scans Trend
         monthly_scans = list(
-            DiseasePrediction.objects.filter(
-                user=user, created_at__gte=six_months_ago
-            )
+            DiseasePrediction.objects.filter(user=user, created_at__gte=six_months_ago)
             .annotate(month=TruncMonth("created_at"))
             .values("month")
             .annotate(count=Count("id"))

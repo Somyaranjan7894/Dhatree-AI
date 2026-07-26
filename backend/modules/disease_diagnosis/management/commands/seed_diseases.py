@@ -15,8 +15,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         import os
-        json_path = os.path.join(os.path.dirname(__file__), 'disease_seed_data.json')
-        with open(json_path, 'r') as f:
+
+        json_path = os.path.join(os.path.dirname(__file__), "disease_seed_data.json")
+        with open(json_path, "r") as f:
             seed_data = json.load(f)
 
         created_count = 0
