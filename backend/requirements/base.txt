@@ -25,7 +25,7 @@ redis>=5.0.3
 
 # AI / Data Science Stack
 google-genai>=0.2.0
-numpy>=1.26.4
+numpy>=1.26.4,<2.0.0
 pandas>=2.2.2
 scikit-learn>=1.4.2
 # Note: For GPU setups or specific OS architectures, tensorflow and torch can be customized via pip index wheels
