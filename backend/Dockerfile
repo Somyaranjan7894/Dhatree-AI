@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY requirements/ /build/requirements/
 RUN pip install --upgrade pip && \
-    pip wheel --no-cache-dir --no-deps --wheel-dir /build/wheels -r requirements/prod.txt
+    pip wheel --no-cache-dir --wheel-dir /build/wheels -r requirements/prod.lock
 
 # Final Stage
 FROM python:3.11-slim
@@ -37,7 +37,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY --from=builder /build/wheels /wheels
 COPY --from=builder /build/requirements /app/backend/requirements
-RUN pip install --no-cache /wheels/*
+RUN pip install --no-cache --no-index --find-links=/wheels -r requirements/prod.lock
 
 COPY . /app/backend/
 
