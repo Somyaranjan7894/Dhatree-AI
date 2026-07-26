@@ -83,6 +83,11 @@ ml_models_cache/
 wandb/
 mlruns/
 
+# Exception: Include production AI model artifacts for deployment
+!backend/ai_engine/models/**/*.joblib
+!backend/ai_engine/models/**/*.keras
+!backend/ai_engine/models/**/*.json
+
 # Docker & OS
 docker-compose.override.yml
 *.sublime-project
