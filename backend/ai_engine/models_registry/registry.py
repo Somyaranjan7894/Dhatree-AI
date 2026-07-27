@@ -47,12 +47,15 @@ class ModelsRegistry:
                 return self._loaded_models[model_key]
 
             logger.info(f"Loading AI model artifact into memory: [{model_key}]")
+            logger.info(f"Resolved AI_MODEL_REGISTRY_PATH: {self._registry_path.resolve()}")
             try:
                 model_artifact = loader_callable(self._registry_path)
                 self._loaded_models[model_key] = model_artifact
                 return model_artifact
             except Exception as exc:
-                logger.error(f"Failed to load AI model [{model_key}]: {exc}")
+                import traceback
+                error_trace = traceback.format_exc()
+                logger.error(f"Failed to load AI model [{model_key}]: {exc}\n{error_trace}")
                 raise ModelInferenceError(
                     f"Model [{model_key}] could not be loaded: {exc}"
                 )
@@ -62,4 +65,6 @@ class ModelsRegistry:
         with self._lock:
             if model_key in self._loaded_models:
                 del self._loaded_models[model_key]
+                import gc
+                gc.collect()
                 logger.info(f"Unloaded AI model from cache: [{model_key}]")
